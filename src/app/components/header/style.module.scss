@@ -1,0 +1,33 @@
+@import '../../styles/settings.module.scss';
+
+.header {
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: $foreground;
+
+    h1 {
+        max-inline-size: 100%;
+        color: white;
+        line-height: 1.25;
+    }
+
+    nav {
+        color: (white);
+
+        a:hover {
+            font-weight: bold;
+        }
+    }
+}
+
+// @media (prefers-color-scheme: dark) {
+//     .header {
+//         border-bottom: 1px solid $grayzinho;
+//         padding: 0.5rem;
+//         margin: 0.5rem;
+//     }
+// }
