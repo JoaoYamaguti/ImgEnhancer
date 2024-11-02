@@ -1,16 +1,6 @@
 @import './styles/settings.module.scss';
 
-.home {
-  background-color: $background;
-
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-}
-
 .container {
-
   display: flex;
 
   justify-content: space-between;
@@ -22,21 +12,11 @@
 
   .imagebg{
     flex: 1;
-
+    display: flex;
   }
 
-  .image { 
-    width: 250px;
-    height: 250px;
-
+  img { 
     margin: auto;
-
-    background-image: url('../../public/documento.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-clip: border-box;
-
   }
 }
 
@@ -46,8 +26,6 @@
   display: flex;
   flex-flow: column;
   gap: 2em;
-
-  color: $font;
 
   h1 {
     font-size: 4rem;

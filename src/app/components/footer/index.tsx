@@ -1,6 +1,6 @@
 import './style.scss'
 
-export function Footer() {
+export default function Footer() {
     return (
         <footer>
             <p>ImgEnhancer by João Yamaguti</p>
