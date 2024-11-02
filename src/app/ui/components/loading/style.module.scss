@@ -1,0 +1,32 @@
+@import '../../styles/settings.module.scss';
+
+.loading {
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    div {
+        width: 100px;
+        height: 100px;
+
+        border: 16 solid $background;
+        border-top: 16px solid $primary-color;
+
+        border-radius: 50%;
+
+        animation: spin 1500ms linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

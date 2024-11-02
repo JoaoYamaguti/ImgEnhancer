@@ -1,0 +1,32 @@
+$primary-color: rgb(226, 102, 0);
+$secondary-color: red ; 
+
+$background: #ededed;
+$foreground: #0a0a0a;
+
+$grayzinho: #eaeaea;
+
+$font: #0a0a0a;
+
+@mixin flex-v-center() {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin button($bgcolor: $primary-color) {
+
+    border: none;
+    border-radius: 24px;
+
+    padding: .5em 1.5em;
+
+    background-color: $bgcolor;
+
+    font-size: 1rem;
+    font-weight: bolder;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+}

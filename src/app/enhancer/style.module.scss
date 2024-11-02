@@ -1,4 +1,4 @@
-@import '../styles/settings.module.scss';
+@import '../ui/styles/settings.module.scss';
 
 .form {
     display: flex;
@@ -11,6 +11,7 @@
         block-size: 40px;
 
         border-radius: 16px;
+        cursor: pointer;
     }
 
     select:focus {
@@ -39,15 +40,18 @@
     button {
         align-self: center;
 
+        @include button();
+
+
         inline-size: 200px;
         block-size: 40px;
-        border-radius: 16px;
-
+        
+        cursor: pointer;
     }
 }
 
 .field {
-    inline-size: 70vw;
+    inline-size: 60vw;
     block-size: 200px;
 
     display: flex;
