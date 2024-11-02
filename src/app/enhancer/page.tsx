@@ -6,7 +6,8 @@ export default function Page() {
     return (
         <main className={styles.enhancer}>
 
-            <div>
+            <form action="" className={styles.form}>
+
                 <select name="options" id="options">
                     <option value="enhance">Enhance</option>
                     <option value="upscale">Upscale</option>
@@ -17,9 +18,16 @@ export default function Page() {
                     <input type="file" name="file" id="file" multiple />
                 </div>
 
+                <ul>
+                    <li>file01.png</li>
+                    <li>file01.png</li>
+                    <li>file01.png</li>
+
+                </ul>
+
                 <button>Enhance</button>
 
-            </div>
+            </form>
 
         </main>
     )

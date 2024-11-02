@@ -1,26 +1,26 @@
 @import './styles/settings.module.scss';
 
-body {
-  block-size: 100vh;
-
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-
-  align-items: center;
-
-  background-color: $background;
-  color: $font;
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  
+  background-color: $background;
+  color: $font;
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+}
+
+.main-container{
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 a {

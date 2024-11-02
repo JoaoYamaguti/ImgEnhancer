@@ -1,23 +1,64 @@
 @import '../styles/settings.module.scss';
 
-.enhancer {
+.form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    gap: 1rem;
 
-    background-color: $background;  
+    select {
+        inline-size: 200px;
+        block-size: 40px;
+
+        border-radius: 16px;
+    }
+
+    select:focus {
+        border: 0.9px solid #0a0a0a;
+    }
+
+    ul {
+        
+        display: inline;
+
+        list-style: none;
+
+        li{
+            display: inline;
+
+        }
+
+        li::after{
+            content: ', ';
+        }
+        li:last-child::after{
+            content: '';
+        }
+    }
+
+    button {
+        align-self: center;
+
+        inline-size: 200px;
+        block-size: 40px;
+        border-radius: 16px;
+
+    }
 }
 
 .field {
-    max-inline-size: 800px;
-    height: 200px;
+    inline-size: 70vw;
+    block-size: 200px;
+
+    display: flex;
+    justify-items: center;
+    align-items: center;
 
     margin: auto;
     border: 2px dashed rgb(49, 49, 49);
     border-radius: 24px;
 
-    /* display: flex;
-    justify-items: center;
-    align-items: center; */
-
-    background-color: rgba(255, 155, 4, 0.356);
+    background-color: rgb(218, 204, 184);
 
     input[type='file'] {
         height: 100%;
@@ -33,6 +74,4 @@
         position: absolute;
         cursor: pointer;
     }
-
-
 }
