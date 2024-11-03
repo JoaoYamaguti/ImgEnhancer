@@ -4,18 +4,38 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from './style.module.scss'
-import clsx from 'clsx'
-import { useState } from 'react'
 import Loading from '../loading'
+import { useEffect, useState } from 'react'
+import Enhancer from '@imgenhancer/app/lib/enhancer'
 
-export default function Process({ setVisibility }) {
+export default function Process({ setVisibility, file }) {
 
-    const loaded = true
+    const [loaded, setLoaded] = useState(false)
+    const [urlFile, setUrlFile] = useState('')
+    const [newImg, setNewImg] = useState('')
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        setUrlFile(e.target.result)
+    };
+
+    reader.readAsDataURL(file)
+    function process(file) {
+        setNewImg(Enhancer(file))
+        if (newImg) {
+            setLoaded(true)
+        }
+    }
 
     const download = () => {
 
     }
 
+    useEffect(() => {
+        process(urlFile)
+
+    }, [])
 
     return (
         <div className={styles.container} onClick={() => { setVisibility(false) }}>
@@ -30,7 +50,7 @@ export default function Process({ setVisibility }) {
                                         <div>
                                             <span>Imagem Antiga:</span>
                                             <Image
-                                                src={'/documento.png'}
+                                                src={urlFile}
                                                 alt={'old image'}
                                                 width={200}
                                                 height={200}
@@ -68,7 +88,11 @@ export default function Process({ setVisibility }) {
                         </>
 
                     ) : (
-                        <Loading />
+                        <>
+                            <Loading />
+                            {/* <div onClick={process(urlFile)}></div> */}
+                        </>
+
 
                     )
                 }

@@ -10,6 +10,26 @@ export default function Page() {
 
     const [visibility, setVisibility] = useState(false)
 
+    const [file, setFile] = useState()
+
+    const handleFile = (file) => {
+        const types = ['jpeg', 'png', 'svg']
+
+        const [, type] = file.type.split('/')
+
+        if (types.includes(type)) {
+            setFile(file)
+        } else {
+            alert('Attach a valid Image. (.jpeg, .png, .svg)')
+        }
+    }
+
+    const handleProcess = () => {
+        if (file) {
+            setVisibility(true) 
+        } else alert('Attach a valid Image. (.jpeg, .png, .svg)')
+    }
+
     return (
         <main className={styles.enhancer}>
 
@@ -22,18 +42,20 @@ export default function Page() {
 
                 <div className={styles.field}>
                     <label htmlFor="file">Choose or drag a file</label>
-                    <input type="file" name="file" id="file" multiple />
+                    <input type="file" name="file" id="file"
+                        accept=".png, .jpeg, .svg"
+                        onChange={(e) => {
+                            handleFile(e.target.files[0])
+                        }} />
                 </div>
 
                 <ul>
-                    <li>file01.png</li>
-                    <li>file01.png</li>
-                    <li>file01.png</li>
+                    {file && (<li>{file.name}</li>)}
                 </ul>
-                <button type="button" onClick={()=>{setVisibility(true)}}>Enhance</button>
+                <button type="button" onClick={handleProcess}>Enhance</button>
 
                 {
-                    visibility && <Process setVisibility={setVisibility}/>
+                    visibility && <Process setVisibility={setVisibility} file={file} />
                 }
 
 
