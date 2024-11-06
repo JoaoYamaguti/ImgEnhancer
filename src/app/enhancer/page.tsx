@@ -2,21 +2,29 @@
 
 import { useEffect, useState } from "react";
 
-import { data } from '@imgenhancer/app/lib/data'
-
 import Process from '../ui/components/process'
 import Range from "../ui/components/range";
+import Number from "../ui/components/number";
 import Rotate from "../ui/components/rotate";
 
+import { data } from '@imgenhancer/app/lib/data'
 
 import styles from './style.module.scss'
-import Number from "../ui/components/number";
 
 interface Service {
-    component: string
-    value: number
-    width: number
-    height: number
+    service: string
+    component?: string
+    min?: number
+    max?: number
+    options?: string[]
+}
+
+interface Process {
+    
+    file?: FileList | null | undefined
+    value?: number | string
+    width?: number
+    height?:number
 }
 
 export default function Page() {
@@ -24,8 +32,9 @@ export default function Page() {
     const services = data
 
     const options: string[] = []
-    data.forEach((s: object) => options.push(s.service))
-    let process = {}
+    data.forEach((s) => options.push(s.service))
+
+    let process: Process = {}
 
     const [visibility, setVisibility] = useState(false)
 
@@ -47,7 +56,7 @@ export default function Page() {
 
     }
 
-    const handleFile = (file) => {
+    const handleFile = (file: Process['file']) => {
         const types = ['jpeg', 'png', 'svg']
 
         const [, type] = file.type.split('/')
