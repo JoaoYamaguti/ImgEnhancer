@@ -6,34 +6,19 @@ import Image from 'next/image'
 import styles from './style.module.scss'
 import Loading from '../loading'
 import { useEffect, useState } from 'react'
-import Enhancer from '@imgenhancer/app/lib/enhancer'
+import Magic from '@imgenhancer/app/lib/Magic'
 
 export default function Process({ setVisibility, file }) {
 
-    const [loaded, setLoaded] = useState(false)
     const [urlFile, setUrlFile] = useState('')
-    const [newImg, setNewImg] = useState('')
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-        setUrlFile(e.target.result)
-    };
-
-    reader.readAsDataURL(file)
-    function process(file) {
-        setNewImg(Enhancer(file))
-        if (newImg) {
-            setLoaded(true)
-        }
-    }
+    const [urlNewFile, setUrlNewFile] = useState('')
 
     const download = () => {
 
     }
 
     useEffect(() => {
-        process(urlFile)
+        Magic(file, setUrlFile, setUrlNewFile)
 
     }, [])
 
@@ -41,7 +26,7 @@ export default function Process({ setVisibility, file }) {
         <div className={styles.container} onClick={() => { setVisibility(false) }}>
             <main onClick={(event) => event.stopPropagation()}>
                 {
-                    loaded ? (
+                    urlNewFile ? (
                         <>
                             <div className={styles.close} onClick={() => { setVisibility(false) }}></div>
                             <div className={styles.content}>
@@ -49,26 +34,26 @@ export default function Process({ setVisibility, file }) {
                                     <div className={styles.figures}>
                                         <div>
                                             <span>Imagem Antiga:</span>
-                                            <Image
+                                            {urlNewFile && <Image
                                                 src={urlFile}
                                                 alt={'old image'}
                                                 width={200}
                                                 height={200}
-                                            />
+                                            />}
                                         </div>
                                         <div>
                                             <span>Imagem Nova:</span>
-                                            <Image
-                                                src={'/documento.png'}
-                                                alt={'old image'}
+                                            {urlNewFile && <Image
+                                                src={urlNewFile}
+                                                alt={'new image'}
                                                 width={200}
                                                 height={200}
-                                            />
+                                            />}
                                         </div>
 
                                     </div>
 
-                                    <button type='button' onClick={(console.log('clicou'))}>
+                                    <button type='button'>
                                         <Image
                                             src={'/download-direto-w.png'}
                                             alt='dodnload'
@@ -86,14 +71,8 @@ export default function Process({ setVisibility, file }) {
                                 </section>
                             </div>
                         </>
-
                     ) : (
-                        <>
-                            <Loading />
-                            {/* <div onClick={process(urlFile)}></div> */}
-                        </>
-
-
+                        <Loading />
                     )
                 }
             </main>

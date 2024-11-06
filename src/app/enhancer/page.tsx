@@ -1,16 +1,50 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { data } from '@imgenhancer/app/lib/data'
 
 import Process from '../ui/components/process'
+import Range from "../ui/components/range";
 
 import styles from './style.module.scss'
+import Number from "../ui/components/number";
+import { ValueOf } from "next/dist/shared/lib/constants";
+
+interface Service {
+    component: string
+    value: number
+    width: number
+    height: number
+}
 
 export default function Page() {
+
+    const services = data
+
+    const options: string[] = []
+    data.forEach((s: object) => options.push(s.service))
+    let process = {}
 
     const [visibility, setVisibility] = useState(false)
 
     const [file, setFile] = useState()
+    const [option, setOption] = useState()
+    const [service, setService] = useState({})
+    const [value, setValue] = useState()
+    const [width, setWidth] = useState()
+    const [height, setHeight] = useState()
+
+    const handleOption = (option: string) => {
+        process = {}
+
+        setService(data.find((s) => s.service === option))
+
+        setValue(false)
+        setWidth(false)
+        setHeight(false)
+
+    }
 
     const handleFile = (file) => {
         const types = ['jpeg', 'png', 'svg']
@@ -18,27 +52,61 @@ export default function Page() {
         const [, type] = file.type.split('/')
 
         if (types.includes(type)) {
+
             setFile(file)
+
         } else {
             alert('Attach a valid Image. (.jpeg, .png, .svg)')
         }
     }
 
     const handleProcess = () => {
-        if (file) {
-            setVisibility(true) 
-        } else alert('Attach a valid Image. (.jpeg, .png, .svg)')
+        if (file && option) {
+            setVisibility(true)
+        } else alert('Make sure you have chosen a option and attached a file.')
     }
+
+    useEffect(() => {
+        if (value) process.value = value
+        if (width) process.width = width
+        if (height) process.height = height
+
+        console.log(process)
+
+    }, [value, width, height])
 
     return (
         <main className={styles.enhancer}>
-
             <form action="" className={styles.form}>
 
-                <select name="options" id="options">
-                    <option value="enhance">Enhance</option>
-                    <option value="upscale">Upscale</option>
-                </select>
+                <div className={styles.selectors}>
+                    <select name="options" id="options" onChange={(e) => { handleOption(e.target.value) }}>
+                        <option key={-1} value=""></option>
+                        {
+                            options.map((option, index) => <option key={index} value={option}>{option}</option>)
+                        }
+                    </select>
+
+                    {
+                        service.component === "range" && <Range value={value} setValue={setValue} min={service.component.min} max={service.component.max} />
+                    }
+                    {
+                        service.component === "number" && (
+                            <>
+                                <Number key={0} label={'width'} value={width} setValue={setWidth} />
+                                <Number key={1} label={'height'} value={height} setValue={setHeight} />
+                            </>
+                        )
+                    }
+                    {
+                        service.component === "select" &&
+                        (
+                            <>
+                                <span>gdfhd</span>
+                            </>
+                        )
+                    }
+                </div>
 
                 <div className={styles.field}>
                     <label htmlFor="file">Choose or drag a file</label>
@@ -57,10 +125,7 @@ export default function Page() {
                 {
                     visibility && <Process setVisibility={setVisibility} file={file} />
                 }
-
-
             </form>
-
         </main>
     )
 }

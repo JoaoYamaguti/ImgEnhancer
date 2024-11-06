@@ -1,4 +1,4 @@
-@import '../../styles/settings.module.scss';
+@use '../../styles/settings.module' as * ;
 
 .container {
 
@@ -96,6 +96,9 @@
         }
         span{
              font-weight: bold;
+        }
+        img{
+            object-fit: contain;
         }
 
     }

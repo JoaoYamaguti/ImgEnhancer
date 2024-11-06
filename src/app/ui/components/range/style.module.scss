@@ -1,0 +1,35 @@
+@use '../../styles/settings.module.scss' as *;
+
+
+.display{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .range {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 0.5rem;
+    
+        input[type=range]{
+            display: inline;
+        }
+    
+        .btn {
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 1px solid black;
+
+
+
+            display: inline;
+            cursor: pointer;
+        }
+    }
+}

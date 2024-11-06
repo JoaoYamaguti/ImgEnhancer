@@ -1,0 +1,28 @@
+@use '../../styles/settings.module.scss' as *;
+
+
+.display {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    span {
+        text-transform: capitalize;
+    }
+
+    .number {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 0.5rem;
+
+        input[type=range] {
+            display: inline;
+        }
+
+        .btn {
+            display: inline;
+            cursor: pointer;
+        }
+    }
+}
