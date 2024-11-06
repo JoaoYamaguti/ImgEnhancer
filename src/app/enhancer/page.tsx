@@ -6,10 +6,11 @@ import { data } from '@imgenhancer/app/lib/data'
 
 import Process from '../ui/components/process'
 import Range from "../ui/components/range";
+import Rotate from "../ui/components/rotate";
+
 
 import styles from './style.module.scss'
 import Number from "../ui/components/number";
-import { ValueOf } from "next/dist/shared/lib/constants";
 
 interface Service {
     component: string
@@ -99,12 +100,7 @@ export default function Page() {
                         )
                     }
                     {
-                        service.component === "select" &&
-                        (
-                            <>
-                                <span>gdfhd</span>
-                            </>
-                        )
+                        service.component === 'select' && <Rotate options={service.options} setValue={setValue} />
                     }
                 </div>
 

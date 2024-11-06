@@ -1,0 +1,10 @@
+@use '../../styles/settings.module.scss' as *;
+
+.rotate{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1rem;
+
+    text-transform: capitalize;
+}
