@@ -1,6 +1,6 @@
 "use client"
 
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Process from '../ui/components/process'
 import Range from "../ui/components/range";
@@ -14,14 +14,6 @@ import { IProcess } from "../lib/interfaces/process.interface";
 
 import styles from './style.module.scss'
 
-interface Process {
-    
-    file?: FileList | null | undefined
-    value?: number | string
-    width?: number
-    height?:number
-}
-
 export default function Page() {
 
     const services: Array<IService> = data
@@ -32,35 +24,46 @@ export default function Page() {
     // let process: Process = {}
     const [process, setProcess] = useState<IProcess>({})
 
-    const [visibility, setVisibility] = useState(false)
-    const [file, setFile] = useState<IProcess['file']>({})
     const [option, setOption] = useState('')
-    const [service, setService] = useState<IService | undefined>({})
+    const [service, setService] = useState<IService>({
+        service: '',
+        component: '',
+        min: 0,
+        max: 0,
+        options: [],
+    })
     const [value, setValue] = useState(0)
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
+    const [file, setFile] = useState<IProcess['file'] | null>(null)
+    const [visibility, setVisibility] = useState(false)
+    
 
     const handleOption = (option: string) => {
-        setService(services.find((s) => s.service === option))
-
         setOption(option)
+
+        // setService(services.find((s) => s.service === option))
+        const choosedService = (services.find((s) => s.service === option) as IService) ?? null;
+        setService(choosedService)
         
         setProcess({})
         setValue(0)
         setWidth(0)
         setHeight(0)
-
     }
 
-    const handleFile = (ob: IProcess['file']) => {
+    const handleFile = (file: IProcess['file']) => {
+
+        if (file === undefined || file === null)  {
+            return alert('Attach a valid Image. (.jpeg, .png, .svg)')
+        }
+
         const types = ['jpeg', 'png', 'svg']
 
-        const [, type] = ob.type.split('/')
+        const [, type] = file.type.split('/')
 
         if (types.includes(type)) {
-
-            setFile(ob)
-
+            setFile(file)
         } else {
             alert('Attach a valid Image. (.jpeg, .png, .svg)')
         }
@@ -94,7 +97,7 @@ export default function Page() {
                     </select>
 
                     {
-                        service.component === "range" && <Range value={value} setValue={setValue} min={service.component.min} max={service.component.max} />
+                            service.component === "range" && <Range value={value} setValue={setValue} min={service.min} max={service.max} />
                     }
                     {
                         service.component === "number" && (
@@ -113,9 +116,8 @@ export default function Page() {
                     <label htmlFor="file">Choose or drag a file</label>
                     <input type="file" name="file" id="file"
                         accept=".png, .jpeg, .svg"
-                        onChange={(e) => {
-                            handleFile(e.target.files[0])
-                        }} />
+                        onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])} 
+                    />
                 </div>
 
                 <ul>

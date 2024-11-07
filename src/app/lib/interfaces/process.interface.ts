@@ -1,6 +1,6 @@
 interface IProcess {
     
-    file?: File | FileList | null | undefined
+    file?: File
     value?: number | string
     width?: number
     height?:number

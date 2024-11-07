@@ -1,6 +1,8 @@
 import styles from "./style.module.scss";
 
-export default function Number({ label, value, setValue }) {
+import { IOptionParams } from "../lib/interfaces/service.interface";
+
+export default function Number({ label, setValue }: IOptionParams) {
 
     return (
             <div className={styles.display}>

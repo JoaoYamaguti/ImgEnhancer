@@ -2,22 +2,19 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import Loading from '../loading'
 
 import Magic from '@imgenhancer/app/lib/Magic'
 
+import { IProcess } from "../lib/interfaces/process.interface";
+
 import styles from './style.module.scss'
 
 interface ProcessParams {
-    setVisibility: boolean
-    process: {
-        file: {}
-        value?: number
-        width?: number
-        height?: number
-    }
+    setVisibility: Dispatch<SetStateAction<boolean>>
+    process: IProcess
 }
 
 export default function Process({ setVisibility, process }: ProcessParams) {

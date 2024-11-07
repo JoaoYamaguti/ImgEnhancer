@@ -1,13 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 import styles from "./style.module.scss";
 
-interface RotateParams {
-    options:string[]
-    value?: number
-    setValue: Dispatch<SetStateAction<number>>
-}
+import { IOptionParams } from "../lib/interfaces/service.interface";
 
-export default function Rotate({options, value, setValue}: RotateParams) {
+export default function Rotate({options, value, setValue}: IOptionParams) {
 
     return(
         <div className={styles.rotate}>
