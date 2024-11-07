@@ -1,6 +1,9 @@
 import { Jimp } from "jimp";
 
-export default async function Magic(file, setUrlFile, setUrlNewFile) {
+import { IMagic } from "./interfaces/magic.interface";
+
+export default async function Magic(file: IMagic['file'], setUrlFile: IMagic['setUrlFile'], setUrlNewFile: IMagic['setUrlNewFile']) {
+
     console.log(file)
 
     const reader = new FileReader();

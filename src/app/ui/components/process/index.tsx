@@ -2,13 +2,27 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-
-import styles from './style.module.scss'
-import Loading from '../loading'
 import { useEffect, useState } from 'react'
+
+import Loading from '../loading'
+
 import Magic from '@imgenhancer/app/lib/Magic'
 
-export default function Process({ setVisibility, file }) {
+import styles from './style.module.scss'
+
+interface ProcessParams {
+    setVisibility: boolean
+    process: {
+        file: {}
+        value?: number
+        width?: number
+        height?: number
+    }
+}
+
+export default function Process({ setVisibility, process }: ProcessParams) {
+
+    console.log(process)
 
     const [urlFile, setUrlFile] = useState('')
     const [urlNewFile, setUrlNewFile] = useState('')
@@ -18,7 +32,7 @@ export default function Process({ setVisibility, file }) {
     }
 
     useEffect(() => {
-        Magic(file, setUrlFile, setUrlNewFile)
+        Magic(process.file, setUrlFile, setUrlNewFile)
 
     }, [])
 

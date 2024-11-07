@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 import Process from '../ui/components/process'
 import Range from "../ui/components/range";
@@ -9,15 +9,10 @@ import Rotate from "../ui/components/rotate";
 
 import { data } from '@imgenhancer/app/lib/data'
 
-import styles from './style.module.scss'
+import { IService } from "../lib/interfaces/service.interface";
+import { IProcess } from "../lib/interfaces/process.interface";
 
-interface Service {
-    service: string
-    component?: string
-    min?: number
-    max?: number
-    options?: string[]
-}
+import styles from './style.module.scss'
 
 interface Process {
     
@@ -29,41 +24,42 @@ interface Process {
 
 export default function Page() {
 
-    const services = data
+    const services: Array<IService> = data
 
     const options: string[] = []
-    data.forEach((s) => options.push(s.service))
+    services.forEach((s) => options.push(s.service))
 
-    let process: Process = {}
+    // let process: Process = {}
+    const [process, setProcess] = useState<IProcess>({})
 
     const [visibility, setVisibility] = useState(false)
-
-    const [file, setFile] = useState()
-    const [option, setOption] = useState()
-    const [service, setService] = useState({})
-    const [value, setValue] = useState()
-    const [width, setWidth] = useState()
-    const [height, setHeight] = useState()
+    const [file, setFile] = useState<IProcess['file']>({})
+    const [option, setOption] = useState('')
+    const [service, setService] = useState<IService | undefined>({})
+    const [value, setValue] = useState(0)
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
 
     const handleOption = (option: string) => {
-        process = {}
+        setService(services.find((s) => s.service === option))
 
-        setService(data.find((s) => s.service === option))
-
-        setValue(false)
-        setWidth(false)
-        setHeight(false)
+        setOption(option)
+        
+        setProcess({})
+        setValue(0)
+        setWidth(0)
+        setHeight(0)
 
     }
 
-    const handleFile = (file: Process['file']) => {
+    const handleFile = (ob: IProcess['file']) => {
         const types = ['jpeg', 'png', 'svg']
 
-        const [, type] = file.type.split('/')
+        const [, type] = ob.type.split('/')
 
         if (types.includes(type)) {
 
-            setFile(file)
+            setFile(ob)
 
         } else {
             alert('Attach a valid Image. (.jpeg, .png, .svg)')
@@ -72,6 +68,8 @@ export default function Page() {
 
     const handleProcess = () => {
         if (file && option) {
+            process.file = file
+            console.log(process)
             setVisibility(true)
         } else alert('Make sure you have chosen a option and attached a file.')
     }
@@ -80,8 +78,6 @@ export default function Page() {
         if (value) process.value = value
         if (width) process.width = width
         if (height) process.height = height
-
-        console.log(process)
 
     }, [value, width, height])
 
@@ -128,7 +124,7 @@ export default function Page() {
                 <button type="button" onClick={handleProcess}>Enhance</button>
 
                 {
-                    visibility && <Process setVisibility={setVisibility} file={file} />
+                    visibility && <Process setVisibility={setVisibility} process={process} />
                 }
             </form>
         </main>

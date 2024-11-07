@@ -1,4 +1,6 @@
-export  const data = [
+import { IService } from "../lib/interfaces/service.interface";
+
+export const data: IService[] = [
     {
         service: 'blur',
         component: 'range',
