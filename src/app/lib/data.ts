@@ -16,7 +16,7 @@ export const data: IService[] = [
     {
         service: 'contrast',
         component: 'range',
-        min: 0.1,
+        min: -1,
         max: 1
     },
     {

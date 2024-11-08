@@ -8,7 +8,7 @@ import Loading from '../loading'
 
 import Magic from '@imgenhancer/app/lib/Magic'
 
-import { IProcess } from "../lib/interfaces/process.interface";
+import { IProcess } from "../../../lib/interfaces/process.interface";
 
 import styles from './style.module.scss'
 
@@ -19,19 +19,18 @@ interface ProcessParams {
 
 export default function Process({ setVisibility, process }: ProcessParams) {
 
-    console.log(process)
-
     const [urlFile, setUrlFile] = useState('')
     const [urlNewFile, setUrlNewFile] = useState('')
-
-    const download = () => {
-
-    }
-
+    
     useEffect(() => {
-        Magic(process.file, setUrlFile, setUrlNewFile)
+        
+        if (process.file !== undefined && process !== undefined) {
 
-    }, [])
+            Magic(process, setUrlFile, setUrlNewFile)
+            
+        }
+
+    }, [process.file])
 
     return (
         <div className={styles.container} onClick={() => { setVisibility(false) }}>

@@ -1,9 +1,9 @@
 interface IProcess {
-    
-    file?: File
-    value?: number | string
-    width?: number
-    height?:number
+    service: string
+    file: File
+    value?: number | undefined
+    width?: number | undefined
+    height?:number | undefined
 }
 
 export type {IProcess}
