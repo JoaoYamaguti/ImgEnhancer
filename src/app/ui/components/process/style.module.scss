@@ -1,12 +1,12 @@
 @use '../../styles/settings.module' as * ;
 
-.container {
-    block-size: 100vh;
+.process {
     inline-size: 100vw;
+    block-size: 100vh;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+
+    padding: 1rem;
 
     position: absolute;
     top: 0;
@@ -16,10 +16,16 @@
     background-color: rgba(0, 0, 0, 0.932);
 
     main {
-        @include flex-v-center;
+
+        max-inline-size: 85rem;
+
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
 
         border-radius: 32px;
-        padding: 2rem;
+        margin: auto;
+        padding: 1rem;
 
         background-color: $background;
 
@@ -32,10 +38,6 @@
 
         width: 30px;
         height: 30px;
-
-        position: relative;
-        top: -1.2rem;
-        left: 1rem;
 
         background-image: url('../../../../../public/botao-excluir.png');
         background-position: center center;
@@ -50,16 +52,34 @@
         @include flex-v-center;
         gap: 2rem;
         
-        section {
-            inline-size: 500px;
-        }
         .response {
             @include flex-v-center;
-            gap: 2rem;
+            gap: 1rem;
     
-    
+            .figures {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 1rem;
+                
+                div {
+                    flex-basis: 15rem;
+                    
+                    @include flex-v-center;
+                    gap: 1rem;
+                }
+                span{
+                     font-weight: bold;
+                }
+                img{
+                    object-fit: contain;
+                    object-position: center;
+                }
+            }
+
             a {
-                align-self: flex-end;
+                // align-self: flex-end;
                 
                 @include button($secondary-color);
     
@@ -67,10 +87,13 @@
                 justify-content: center;
                 align-items: center;
     
-                margin-right: 2rem;
+                // margin-right: 2rem;
     
                 border: none;
                 border-radius: 24px;
+
+                text-align: center;
+                font-size: 1rem;
                 
                 img{
                     margin-bottom: 3px
@@ -78,25 +101,6 @@
             }
         }
     
-        .figures {
-            display: flex;
-            flex-flow: row nowrap;
-            // justify-content: space-between;
-            align-items: flex-start;
-            gap: 2rem;
-    
-            div {
-                @include flex-v-center;
-                gap: 1rem;
-            }
-            span{
-                 font-weight: bold;
-            }
-            img{
-                object-fit: contain;
-            }
-    
-        }
     
         hr{
             width: 100%;
@@ -112,5 +116,12 @@
             }
         }
     }
+}
+
+@media (max-width: 35rem) {
+    .process{
+        block-size: auto;
+    }
+
 }
 
