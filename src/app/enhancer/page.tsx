@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import Process from '../ui/components/process'
-import Range from "../ui/components/range";
 import Number from "../ui/components/number";
 import Rotate from "../ui/components/rotate";
 
@@ -26,17 +25,19 @@ export default function Page() {
     const [option, setOption] = useState('')
     const [service, setService] = useState<IService>({
         service: '',
-        component: '',
-        min: 0,
-        max: 0,
-        options: [],
+        components: [{
+            type: '',
+            value: '',
+            min: 0,
+            max: 0,
+            options: [],
+        }],
     })
     const [value, setValue] = useState(0)
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
     const [file, setFile] = useState<IProcess['file'] | null>(null)
     const [visibility, setVisibility] = useState(false)
-
 
     const handleOption = (option: string) => {
         setOption(option)
@@ -102,19 +103,36 @@ export default function Page() {
 
                     <div className={styles.params}>
                         {
+                            (service.components) && service.components.map((c, index) => {
+                                if (c.type === 'number' && c.value === 'value') {
+                                    return <Number key={index} label={'value'} value={value} setValue={setValue} />
+                                }
+                                else if (c.type === 'number' && c.value === 'width') {
+                                    return <Number key={index} label={'width'} value={width} setValue={setWidth} />
+                                }
+                                else if (c.type === 'number' && c.value === 'height') {
+                                    return <Number key={index} label={'height'} value={height} setValue={setHeight} />
+                                }
+                                else if (c.type === 'select') {
+                                    return <Rotate key={index} options={c.options} setValue={setValue} />
+                                }
+                            })
+                        }
+
+                        {/* {
                             (service.component && service.component) === "range" && <Range value={value} setValue={setValue} min={service.min} max={service.max} />
-                        }
-                        {
-                            (service.component && service.component) === "number" && (
-                                <>
-                                    <Number key={0} label={'width'} value={width} setValue={setWidth} />
-                                    <Number key={1} label={'height'} value={height} setValue={setHeight} />
-                                </>
-                            )
-                        }
-                        {
+                        } */}
+                        {/* {
+                            (service.component === 'number') && service.values.map((e, index) => (<p></p>));
+                        // <>
+                        //     <Number key={0} label={'width'} value={width} setValue={setWidth} />
+                        //     <Number key={1} label={'height'} value={height} setValue={setHeight} />
+                        // </>
+                        } */}
+
+                        {/* {
                             (service.component && service.component) === 'select' && <Rotate options={service.options} setValue={setValue} />
-                        }
+                        } */}
                     </div>
                 </div>
 

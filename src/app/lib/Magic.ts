@@ -20,7 +20,7 @@ export default async function Magic(process: IMagic['process'], setUrlFile: IMag
 
         switch (process.service) {
             case 'blur':
-                image.blur(process.value ?? 0)
+                image.blur(process.value ?? 1)
 
                 break;
             case 'brightness':

@@ -11,14 +11,14 @@
 
     .selectors {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
 
         select {
-            flex-basis: 200px;
-            // block-size: 40px;
+            flex-basis: 15rem;
+            block-size: 40px;
 
             border-radius: 16px;
             cursor: pointer;
@@ -76,7 +76,7 @@
 
 .field {
     inline-size: 40rem;
-    block-size: 200px;
+    block-size: 15rem;
 
     margin: auto;
     border: 2px dashed rgb(49, 49, 49);
@@ -109,13 +109,16 @@
 
 @media (max-width: 45rem) {
     .form {
+        .selectors {
+            justify-content: center;
+
+        }
         select {
+            flex-basis: 40px;
             inline-size: 100%;
+            // flex: 1 0 0;
         }
 
-        .selectors {
-            flex-flow: column nowrap;
-        }
     }
 
     .field {
