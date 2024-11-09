@@ -6,7 +6,7 @@ interface IOptionParams {
     setValue?:Dispatch<SetStateAction<number>>
     min?: number
     max?: number
-    options?: string[]
+    options?: number[]
 
 }
 

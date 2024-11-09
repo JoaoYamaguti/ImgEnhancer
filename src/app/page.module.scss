@@ -3,25 +3,27 @@
 .container {
   display: flex;
 
-  justify-content: space-between;
+  // justify-content: ;
   align-items: center;
+  flex-flow: row;
+  gap: 2rem;
 
   border-radius: 48px;
 
   padding: 3em;
 
-  .imagebg{
+  .imagebg {
     flex: 1;
     display: flex;
   }
 
-  img { 
+  img {
     margin: auto;
   }
 }
 
 .content {
-  flex-basis: 65%;
+  flex-shrink: 15rem;
 
   display: flex;
   flex-flow: column;
@@ -40,10 +42,24 @@
     @include button();
 
     align-self: flex-start;
-   
+
   }
 }
 
+
+@media (max-width: 45rem) {
+  .container {
+    padding: 1rem;
+    flex-flow: row wrap;
+  }
+
+  .content {
+
+    h1 {
+      font-size: 3.5rem;
+    }
+  }
+}
 
 
 // .page {

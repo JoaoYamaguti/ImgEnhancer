@@ -23,14 +23,16 @@ export default function Process({ setVisibility, process }: ProcessParams) {
     const [urlNewFile, setUrlNewFile] = useState('')
     
     useEffect(() => {
-        
-        if (process.file !== undefined && process !== undefined) {
-
-            Magic(process, setUrlFile, setUrlNewFile)
+        try {
+            if (process !== undefined) {
+                Magic(process, setUrlFile, setUrlNewFile)
+            }
             
+        } catch (error) {
+            console.log(error)
         }
 
-    }, [process.file])
+    }, [process])
 
     return (
         <div className={styles.container} onClick={() => { setVisibility(false) }}>
@@ -63,14 +65,14 @@ export default function Process({ setVisibility, process }: ProcessParams) {
 
                                     </div>
 
-                                    <button type='button'>
+                                    <a href={urlNewFile} download>
                                         <Image
                                             src={'/download-direto-w.png'}
                                             alt='dodnload'
                                             width={15}
                                             height={15}
                                         />
-                                        Download</button>
+                                        Download</a>
                                 </section>
 
                                 <hr />

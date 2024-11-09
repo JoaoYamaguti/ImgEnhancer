@@ -5,13 +5,13 @@ export const data: IService[] = [
         service: 'blur',
         component: 'range',
         min:1,
-        max:10,
+        max:20,
     },
     {
         service: 'brightness',
         component: 'range',
         min: 0.1,
-        max: 1
+        max: 10.1
     },
     {
         service: 'contrast',
@@ -44,7 +44,7 @@ export const data: IService[] = [
     {
         service: 'rotate',
         component: 'select',
-        options: [90, 180, 270, 360]
+        options: [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360]
     },
     {
         service: 'scale',

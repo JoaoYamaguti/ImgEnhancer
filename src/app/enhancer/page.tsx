@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Process from '../ui/components/process'
 import Range from "../ui/components/range";
@@ -21,7 +21,7 @@ export default function Page() {
     const options: string[] = []
     services.forEach((s) => options.push(s.service))
 
-    const [process, setProcess] = useState({} as IProcess) 
+    const [process, setProcess] = useState({} as IProcess)
 
     const [option, setOption] = useState('')
     const [service, setService] = useState<IService>({
@@ -43,7 +43,7 @@ export default function Page() {
 
         // setService(services.find((s) => s.service === option))
         const choosedService = (services.find((s) => s.service === option) as IService) ?? null;
-        setService(choosedService)
+        setService(choosedService || { component: null })
 
         setProcess({} as IProcess)
         setValue(0)
@@ -69,21 +69,24 @@ export default function Page() {
     }
 
     const handleProcess = () => {
-        if (file && option) {
-            process.file = file
-            setVisibility(true)
-        } else alert('Make sure you have chosen a option and attached a file.')
-    }
-
-    useEffect(() => {
         if (process !== null) {
-            if (option) process.service = option
-            if (value) process.value = value
-            if (width) process.width = width
-            if (height) process.height = height
-        }
+            const processObj = {} as IProcess
 
-    }, [value, width, height, option])
+            if (option) processObj.service = option
+            if (file) processObj.file = file
+            if (value) processObj.value = value
+            if (width) processObj.width = width
+            if (height) processObj.height = height
+
+            setProcess(processObj)
+
+        }
+        if (file && process) {
+
+            setVisibility(true)
+        }
+        else alert('Make sure you have chosen a option and attached a file.')
+    }
 
     return (
         <main className={styles.enhancer}>
@@ -97,33 +100,32 @@ export default function Page() {
                         }
                     </select>
 
-                    {
-                        service.component === "range" && <Range value={value} setValue={setValue} min={service.min} max={service.max} />
-                    }
-                    {
-                        service.component === "number" && (
-                            <>
-                                <Number key={0} label={'width'} value={width} setValue={setWidth} />
-                                <Number key={1} label={'height'} value={height} setValue={setHeight} />
-                            </>
-                        )
-                    }
-                    {
-                        service.component === 'select' && <Rotate options={service.options} setValue={setValue} />
-                    }
+                    <div className={styles.params}>
+                        {
+                            (service.component && service.component) === "range" && <Range value={value} setValue={setValue} min={service.min} max={service.max} />
+                        }
+                        {
+                            (service.component && service.component) === "number" && (
+                                <>
+                                    <Number key={0} label={'width'} value={width} setValue={setWidth} />
+                                    <Number key={1} label={'height'} value={height} setValue={setHeight} />
+                                </>
+                            )
+                        }
+                        {
+                            (service.component && service.component) === 'select' && <Rotate options={service.options} setValue={setValue} />
+                        }
+                    </div>
                 </div>
 
                 <div className={styles.field}>
-                    <label htmlFor="file">Choose or drag a file</label>
                     <input type="file" name="file" id="file"
                         accept=".png, .jpeg, .svg"
                         onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])}
                     />
+                    <label htmlFor="file">{file ? file.name : 'Choose or drag a file'}</label>
                 </div>
 
-                <ul>
-                    {file && (<li>{file.name}</li>)}
-                </ul>
                 <button type="button" onClick={handleProcess}>Enhance</button>
 
                 {
