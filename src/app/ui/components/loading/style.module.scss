@@ -17,6 +17,7 @@
 }
 
 .loading {
+    max-block-size: 15rem;
 
     display: flex;
     flex-flow: column nowrap;
@@ -24,12 +25,12 @@
     align-items: center;
     gap: 2rem;
     border-radius: 32px;
-        margin: auto;
-        padding: 1rem;
+    margin: auto;
+    padding: 1rem;
 
-        background-color: $background;
+    background-color: $background;
 
-        box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 3px 8px;
 
     div {
         width: 100px;

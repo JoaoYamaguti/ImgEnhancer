@@ -29,9 +29,17 @@
 
         input[type= 'number'] {
             max-inline-size: 4rem;
+            block-size: 23px;
 
             font-size: 1rem;
             text-align: center;
+
+            border-radius: 16px;
+            cursor: pointer;
+            text-transform: capitalize;
+            text-align: center;
+            border: 0.9px solid rgb(118, 118, 118);
+            background-color: $background;
 
         }
 
