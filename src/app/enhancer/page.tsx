@@ -17,7 +17,7 @@ export default function Page() {
 
     const services: Array<IService> = data
 
-    const options: string[] = []
+    const options: string[] = ['']
     services.forEach((s) => options.push(s.service))
 
     const [process, setProcess] = useState({} as IProcess)
@@ -33,9 +33,9 @@ export default function Page() {
             options: [],
         }],
     })
-    const [value, setValue] = useState(0)
-    const [width, setWidth] = useState(0)
-    const [height, setHeight] = useState(0)
+    const [value, setValue] = useState<null | number>(null)
+    const [width, setWidth] = useState<null | number>(null)
+    const [height, setHeight] = useState<null | number>(null)
     const [file, setFile] = useState<IProcess['file'] | null>(null)
     const [visibility, setVisibility] = useState(false)
 
@@ -47,9 +47,9 @@ export default function Page() {
         setService(choosedService || { component: null })
 
         setProcess({} as IProcess)
-        setValue(0)
-        setWidth(0)
-        setHeight(0)
+        setValue(null)
+        setWidth(null)
+        setHeight(null)
     }
 
     const handleFile = (file: IProcess['file']) => {
@@ -73,20 +73,62 @@ export default function Page() {
         if (process !== null) {
             const processObj = {} as IProcess
 
-            if (option) processObj.service = option
-            if (file) processObj.file = file
-            if (value) processObj.value = value
-            if (width) processObj.width = width
-            if (height) processObj.height = height
+            if (option) {
+                processObj.service = option
+            } else {
+                alert('Make sure you had chosen a option.')
+                return
+            }
+            if (file) {
+                processObj.file = file
+            } else {
+                alert('Make sure you had attached a file.')
+                return
+            }
+            if (value || value === 0) {
+                const valueIsValid = isValid('value', value)
+
+                if (valueIsValid) {
+                    processObj.value = value
+                } else {
+                    alert(`Input a valid value`)
+                    return
+                }
+            }
+            if (width || width === 0) {
+                const widthIsValid = isValid('width', width)
+
+                if (widthIsValid) {
+                    processObj.width = width
+                } else {
+                    alert('Input a valid value')
+                    return
+                }
+            }
+            if (height || height === 0) {
+                const heightIsValid = isValid('height', height)
+
+                if (heightIsValid) {
+                    processObj.height = height
+                } else {
+                    alert('Input a valid value')
+                    return
+                }
+            }
 
             setProcess(processObj)
-
-        }
-        if (file && process) {
-
             setVisibility(true)
         }
-        else alert('Make sure you have chosen a option and attached a file.')
+    }
+
+    function isValid(label: string, value: number) {
+        const component = service.components && service.components.find((c) => c.value === label) as IService['components']
+        if (component === undefined) { return alert(`${label} component does not found`) }
+        if (value < component.min || value > component.max) {
+            return false
+        } else {
+            return true
+        }
     }
 
     return (
@@ -95,7 +137,6 @@ export default function Page() {
 
                 <div className={styles.selectors}>
                     <select name="options" id="options" onChange={(e) => { handleOption(e.target.value) }}>
-                        <option key={-1} value=""></option>
                         {
                             options.map((option, index) => <option key={index} value={option}>{option}</option>)
                         }
@@ -105,34 +146,19 @@ export default function Page() {
                         {
                             (service.components) && service.components.map((c, index) => {
                                 if (c.type === 'number' && c.value === 'value') {
-                                    return <Number key={index} label={'value'} value={value} setValue={setValue} />
+                                    return <Number key={index} label={'value'} value={value} setValue={setValue} min={c.min} max={c.max} />
                                 }
                                 else if (c.type === 'number' && c.value === 'width') {
-                                    return <Number key={index} label={'width'} value={width} setValue={setWidth} />
+                                    return <Number key={index} label={'width'} value={width} setValue={setWidth} min={c.min} max={c.max} />
                                 }
                                 else if (c.type === 'number' && c.value === 'height') {
-                                    return <Number key={index} label={'height'} value={height} setValue={setHeight} />
+                                    return <Number key={index} label={'height'} value={height} setValue={setHeight} min={c.min} max={c.max} />
                                 }
                                 else if (c.type === 'select') {
                                     return <Rotate key={index} options={c.options} setValue={setValue} />
                                 }
                             })
                         }
-
-                        {/* {
-                            (service.component && service.component) === "range" && <Range value={value} setValue={setValue} min={service.min} max={service.max} />
-                        } */}
-                        {/* {
-                            (service.component === 'number') && service.values.map((e, index) => (<p></p>));
-                        // <>
-                        //     <Number key={0} label={'width'} value={width} setValue={setWidth} />
-                        //     <Number key={1} label={'height'} value={height} setValue={setHeight} />
-                        // </>
-                        } */}
-
-                        {/* {
-                            (service.component && service.component) === 'select' && <Rotate options={service.options} setValue={setValue} />
-                        } */}
                     </div>
                 </div>
 

@@ -4,25 +4,42 @@
 .display {
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
     align-items: center;
 
     span {
+        
         text-transform: capitalize;
     }
-
+    
     .number {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         gap: 0.5rem;
-
-        input[type=range] {
-            display: inline;
-        }
-
+    
         .btn {
             display: inline;
             cursor: pointer;
+        }
+
+        span {
+            text-transform: none;
+        }
+
+        input[type= 'number'] {
+            max-inline-size: 4rem;
+
+            font-size: 1rem;
+            text-align: center;
+
+        }
+
+        .valid {
+            color: default
+        }
+        .invalid {
+            color: red
         }
     }
 }
