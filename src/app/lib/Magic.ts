@@ -18,6 +18,8 @@ export default async function Magic(process: IMagic['process'], setUrlFile: IMag
         // Manipulate images uploaded directly from the website.
         const image = await Jimp.fromBuffer(data);
 
+        console.log(await image.getBase64("image/png"))
+
         switch (process.service) {
             case 'blur':
                 image.blur(process.value ?? 1)
@@ -77,6 +79,8 @@ export default async function Magic(process: IMagic['process'], setUrlFile: IMag
 
         setUrlFile(URL.createObjectURL(new Blob([process.file])))
         setUrlNewFile(await image.getBase64("image/png"))
+
+        console.log(await image.getBase64("image/png"))
 
         return
     };

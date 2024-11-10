@@ -12,7 +12,6 @@ import { IService } from "../lib/interfaces/service.interface";
 import { IProcess } from "../lib/interfaces/process.interface";
 
 import styles from './style.module.scss'
-import Footer from "../ui/components/footer";
 import Header from "../ui/components/header";
 
 export default function Page() {

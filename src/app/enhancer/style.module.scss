@@ -1,6 +1,8 @@
 @use '../ui/styles/settings.module.scss' as *;
-.enhancer{
+
+.enhancer {
     display: flex;
+
 }
 
 .form {
@@ -114,13 +116,12 @@
     }
 }
 
-@media (max-width: 75rem) {
-
-}
+@media (max-width: 75rem) {}
 
 @media (max-width: 45rem) {
     .form {
         inline-size: 100%;
+
         .selectors {
             flex-flow: column nowrap;
             justify-content: center;

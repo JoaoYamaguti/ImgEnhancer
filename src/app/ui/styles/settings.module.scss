@@ -1,10 +1,13 @@
 $primary-color: rgb(226, 102, 0);
-$secondary-color: red ; 
+$secondary-color: rgb(0, 78, 151) ; 
+$download-color: red;
 
 $background: #ededed;
 $foreground: #0a0a0a;
 
 $grayzinho: #eaeaea;
+
+$border-input-color: #adadad;
 
 $font: #0a0a0a;
 
@@ -29,4 +32,6 @@ $font: #0a0a0a;
     text-decoration: none;
     text-transform: uppercase;
     color: white;
+
+    cursor: pointer;
 }

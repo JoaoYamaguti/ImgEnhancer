@@ -81,7 +81,7 @@
             a {
                 // align-self: flex-end;
                 
-                @include button($secondary-color);
+                @include button($download-color);
     
                 display: flex;
                 justify-content: center;

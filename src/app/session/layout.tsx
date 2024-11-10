@@ -1,21 +1,23 @@
 
 import Back from "../ui/components/back";
+import Header from "../ui/components/header";
 
 import "./style.scss";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
-        <main className="session">
+    <>
+      <Header />
+      <main className="session">
 
-          <div className="container">
+        <div className="container">
 
-            <Back />
+          {children}
 
-            {children}
+        </div>
 
-          </div>
-
-        </main>
+      </main>
+    </>
   );
 }

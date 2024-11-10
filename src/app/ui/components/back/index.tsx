@@ -2,14 +2,13 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from 'next/navigation'
+
+import './style.scss'
 
 export default function Back() {
 
-    const router = useRouter()
-
     return (
-        <Link href={'/'} replace>
+        <Link href={'/'} className="back">
             <Image
                 src={'/voltar-50-b.png'}
                 width={30}

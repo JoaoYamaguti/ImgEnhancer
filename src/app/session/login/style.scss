@@ -1,0 +1,84 @@
+@use '../../ui/styles/settings.module.scss' as *;
+
+.login {
+    padding: 3rem;
+
+    display: flex;
+
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 2rem;
+
+    .pages {
+        flex-basis: 15rem;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            @include button($secondary-color)
+        }
+    }
+
+    .divisor {
+        block-size: 12rem;
+        border-left: 1px solid $border-input-color;
+    }
+
+    form {
+        flex-basis: 15rem;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        input {
+            padding-left: 1rem;
+            block-size: 2rem;
+            inline-size: none;
+            border: 1px solid $border-input-color;
+            border-radius: 24px;
+            background-color: inherit;
+        }
+
+        button {
+            @include button()
+        }
+    }
+}
+
+@media (max-width: 40rem) {
+    .login {
+        padding: 2rem;
+
+        flex-flow: column-reverse nowrap;
+        gap: 2rem;
+
+        .pages {
+            max-inline-size: 15rem;
+            flex-basis: 0;
+        }
+
+        .divisor {
+            block-size: auto;
+            border-left: none;
+
+            inline-size: 100%;
+            border-top: 1px solid $border-input-color;
+        }
+
+        form {
+            flex-basis: 0
+        }
+    }
+}
