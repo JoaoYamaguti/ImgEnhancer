@@ -1,6 +1,10 @@
 @use '../ui/styles/settings.module.scss' as *;
+.enhancer{
+    display: flex;
+}
 
 .form {
+    align-self: center;
     inline-size: 40rem;
 
     padding: 1rem;
