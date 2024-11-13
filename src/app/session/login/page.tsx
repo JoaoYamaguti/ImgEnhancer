@@ -9,7 +9,7 @@ export default function Page() {
                 <input type="email" name="email" id="email" placeholder='E-mail' />
                 {/* <label htmlFor="password">Password:</label> */}
                 <input type="password" name="password" id="password" placeholder='Password' />
-                <button type="button"><Link href={'/session/gallery'}>Login</Link></button>
+                <button type="button"><Link href={'/user/gallery'}>Login</Link></button>
             </form>
 
             <div className="divisor"></div>

@@ -1,0 +1,35 @@
+@use '../../styles/settings.module.scss' as *;
+
+.infos {
+    inline-size: 100vw;
+    block-size: 100vh;
+
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+    left: 0;
+    top:0; 
+    z-index: 1;
+
+    background-color: blue;
+    
+    .content {
+        flex-basis: 45rem;
+        
+        
+        margin: auto;
+
+        display: flex;
+        flex-flow: column nowrap;
+
+        background-color: $background;
+    }
+
+    .close{
+        align-self: flex-end;
+    }
+}

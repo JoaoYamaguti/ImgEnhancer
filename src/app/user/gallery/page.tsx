@@ -1,7 +1,9 @@
+
+import Card from '@imgenhancer/app/ui/components/card'
+
 import { gallery } from '@imgenhancer/app/lib/gallery'
 
 import './style.scss'
-import Card from '@imgenhancer/app/ui/components/card'
 
 export default function Page() {
     
@@ -9,7 +11,7 @@ export default function Page() {
         <div className="gallery">
 
         {
-            gallery.map((card, index) => <Card key={index} card={{}}/>)
+            gallery.map((card, index) => <Card key={index} card={card}/>)
         }
 
         </div>
