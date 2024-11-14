@@ -10,12 +10,12 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    gap: 1rem;
 
     cursor: pointer;
 
     .imgs{
         align-self: center;
-        margin-bottom: 1rem;
         img{
             object-fit: contain;
         }

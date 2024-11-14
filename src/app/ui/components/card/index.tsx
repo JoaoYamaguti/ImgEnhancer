@@ -1,21 +1,20 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react";
 
 import { ICard } from '@imgenhancer/app/lib/interfaces/card.interface'
 
 import { FiInfo } from "react-icons/fi";
 
 import './style.scss'
-import Infos from "../infos";
 
-export default function Card({ card }: ICard) {
-
-    const [showInfos, setShowInfos] = useState(false)
+export default function Card({ card, setShowInfos, setCardInfos }: ICard) {
 
     return (
-        <div className="card" onClick={() => setShowInfos(true)}>
+        <div className="card" onClick={() => {
+            setCardInfos(card)
+            setShowInfos(true)
+            }}>
             <div className="imgs">
                 <Image
                     src={card.caught_file}
@@ -37,10 +36,6 @@ export default function Card({ card }: ICard) {
                 </div>
                     <FiInfo />
             </div>
-
-            {
-                showInfos && <Infos card={card} setShowInfos={setShowInfos}/>
-            }
         </div>
     )
 }
