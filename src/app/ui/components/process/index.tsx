@@ -19,6 +19,8 @@ interface ProcessParams {
 
 export default function Process({ setVisibility, process }: ProcessParams) {
 
+    console.log(process.file)
+
     const [urlFile, setUrlFile] = useState('')
     const [urlNewFile, setUrlNewFile] = useState('')
 

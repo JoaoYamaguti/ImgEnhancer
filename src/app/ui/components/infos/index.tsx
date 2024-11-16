@@ -7,6 +7,15 @@ import { FiXCircle, FiDownload } from "react-icons/fi";
 import './style.scss'
 
 export default function Infos({ card, setShowInfos }: ICard) {
+    console.log(card.caught_file.split(','))
+
+    const reader = new FileReader()
+
+    reader.onload = ((e) => {
+        console.log(e)
+    })
+
+    reader.readAsDataURL(new Blob([card.caught_file]))
 
     return (
         <div className="infos" onClick={() => setShowInfos(false)}>
@@ -40,7 +49,7 @@ export default function Infos({ card, setShowInfos }: ICard) {
                     </div>
                 </div>
                 <h2>
-                {'filename'}
+                {card.filename}
                 </h2>
                 <span>{card.created_at.toLocaleDateString()}</span>
             </div>

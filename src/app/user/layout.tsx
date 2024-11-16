@@ -8,11 +8,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className="user">
 
-          {children}
+      {children}
 
-      </main>
+
     </>
   );
 }

@@ -6,7 +6,7 @@ import Process from '../ui/components/process'
 import Number from "../ui/components/number";
 import Rotate from "../ui/components/rotate";
 
-import { data } from '@imgenhancer/app/lib/data'
+import { services } from '@imgenhancer/app/lib/services'
 
 import { IService } from "../lib/interfaces/service.interface";
 import { IProcess } from "../lib/interfaces/process.interface";
@@ -15,8 +15,6 @@ import styles from './style.module.scss'
 import Header from "../ui/components/header";
 
 export default function Page() {
-
-    const services: Array<IService> = data
 
     const options: string[] = ['']
     services.forEach((s) => options.push(s.service))

@@ -8,7 +8,7 @@
 
     padding: 1rem;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
@@ -17,10 +17,11 @@
 
     main {
 
-        max-inline-size: 85rem;
+        max-inline-size: 45rem;
 
         display: flex;
         flex-flow: column nowrap;
+        justify-content: space-between;
         gap: 1rem;
 
         border-radius: 32px;
@@ -101,7 +102,6 @@
             }
         }
     
-    
         hr{
             width: 100%;
         }
@@ -117,11 +117,3 @@
         }
     }
 }
-
-@media (max-width: 35rem) {
-    .process{
-        block-size: auto;
-    }
-
-}
-
