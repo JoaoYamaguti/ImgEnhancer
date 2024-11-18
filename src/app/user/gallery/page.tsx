@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { ICard } from '@imgenhancer/app/lib/interfaces/card.interface'
 
-import { fetchGallery } from '@imgenhancer/app/lib/data'
-
 import Card from '@imgenhancer/app/ui/components/card'
 import Infos from '@imgenhancer/app/ui/components/infos'
+import Loading from '@imgenhancer/app/ui/components/loading'
+
+import { getGallery } from '@imgenhancer/app/lib/api'
 
 import './style.scss'
-import Loading from '@imgenhancer/app/ui/components/loading'
 
 export default function Page() {
     const [gallery, setGallery] = useState<ICard[]>([])
@@ -18,9 +18,12 @@ export default function Page() {
     const [showInfos, setShowInfos] = useState(false)
     const [cardInfos, setCardInfos] = useState({} as ICard)
 
+    const [page, SetPage] = useState(1)
+
     const handleGallery = async () => {
-        const data = await fetchGallery() as ICard[]
-        setGallery(data)
+        const data = await getGallery(page)
+        await setGallery(data)
+        console.log(gallery)
     }
 
     useEffect(() => {

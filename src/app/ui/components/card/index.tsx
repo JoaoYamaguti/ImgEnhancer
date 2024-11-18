@@ -17,13 +17,15 @@ export default function Card({ card, setShowInfos, setCardInfos }: ICard) {
             }}>
             <div className="imgs">
                 <Image
-                    src={card.caught_file}
+                    // src={card.caught_file}
+                    src={'/documento.png'}
                     width={100}
                     height={100}
                     alt='caught_file'
                 />
                 <Image
-                    src={card.new_file}
+                    // src={card.new_file}
+                    src={'/documento'}
                     width={100}
                     height={100}
                     alt='caught_file'
@@ -32,7 +34,7 @@ export default function Card({ card, setShowInfos, setCardInfos }: ICard) {
             <div className="legend">
                 <div className="label">
                     <p>filename</p>
-                    <span>{String(card.created_at.toLocaleDateString())}</span>
+                    <span>{card.created_at}</span>
                 </div>
                     <FiInfo />
             </div>
