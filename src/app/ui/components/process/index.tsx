@@ -11,6 +11,7 @@ import Magic from '@imgenhancer/app/lib/Magic'
 import { IProcess } from "../../../lib/interfaces/process.interface";
 
 import styles from './style.module.scss'
+import { postImg } from '@imgenhancer/app/lib/api'
 
 interface ProcessParams {
     setVisibility: Dispatch<SetStateAction<boolean>>
@@ -18,13 +19,35 @@ interface ProcessParams {
 }
 
 export default function Process({ setVisibility, process }: ProcessParams) {
-
-    console.log(process.file)
-
     const [urlFile, setUrlFile] = useState('')
     const [urlNewFile, setUrlNewFile] = useState('')
 
+
+
+    const [filename,] = process.file.name.split('.')
+
+    async function saveImg() {
+
+        console.log(urlFile)
+        console.log(urlNewFile)
+
+        const data = {
+            filename,
+            caught_file: urlFile,
+            new_file: urlNewFile
+        }
+        const response = await postImg(data)
+
+        if (response) return alert("img saved")
+    }
+
     useEffect(() => {
+        const r = new FileReader();
+        r.onload = async (e) => {
+            setUrlFile(e.target?.result)
+        }
+        r.readAsDataURL(process.file)
+
         try {
             if (process !== undefined) {
                 Magic(process, setUrlFile, setUrlNewFile)
@@ -33,7 +56,6 @@ export default function Process({ setVisibility, process }: ProcessParams) {
         } catch (error) {
             console.log(error)
         }
-
     }, [process])
 
     return (
@@ -46,7 +68,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
                             <section className={styles.response}>
                                 <div className={styles.figures}>
                                     <div>
-                                        <span>Atteched Image:</span>
+                                        <span>Attached Image:</span>
                                         {<Image
                                             src={urlFile}
                                             alt={'old image'}
@@ -81,7 +103,11 @@ export default function Process({ setVisibility, process }: ProcessParams) {
 
                             <section className={styles.login}>
                                 <span>Would you like save your images?</span>
-                                <Link href={'/session/login'}> Login or Sing In</Link>
+                                <button type='button' onClick={saveImg}>
+                                    {/* <Link href={'/session/login'}>  */}
+                                    Login or Sing In
+                                    {/* </Link> */}
+                                </button>
                             </section>
                         </div>
                     </main>

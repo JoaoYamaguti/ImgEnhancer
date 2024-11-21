@@ -51,7 +51,7 @@ export default function Infos({ card, setShowInfos }: ICard) {
                 <h2>
                 {card.filename}
                 </h2>
-                <span>{card.created_at.toLocaleDateString()}</span>
+                <span>{card.created_at}</span>
             </div>
         </div>
     )

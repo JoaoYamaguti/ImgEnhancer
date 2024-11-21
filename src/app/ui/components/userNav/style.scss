@@ -1,0 +1,65 @@
+@use '../../styles/settings.module.scss' as *;
+
+@keyframes userNavAnimation {
+    0% {
+        opacity: 0;
+        display: none;
+    }
+
+    100% {
+        opacity: 1;
+        display: flex;
+    }
+}
+
+.userNav {
+
+    // margin-right: -10rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+
+        list-style: none;
+
+        li {
+            display: none;
+            // display: flex;
+            align-items: center;
+            justify-content: center;
+            // animation: userNavAnimation 500ms alternate;
+        }
+
+        li:nth-child(1),
+        li:nth-child(2) {
+            opacity: 0;
+            display: none;
+            // animation: userNavAnimation 500ms reverse;
+        }
+    }
+
+    .icon {
+        display: flex;
+        opacity: 100;
+        cursor: pointer;
+    }
+
+    // .icon:hover + ul {
+    //     opacity: 100;
+
+    // }
+    ul:hover li:nth-child(1),
+    ul:hover li:nth-child(2) {
+        animation: userNavAnimation 500ms forwards;
+        display: flex;
+        opacity: 1;
+
+    }
+}

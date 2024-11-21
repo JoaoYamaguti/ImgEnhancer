@@ -15,11 +15,23 @@ export default function Page() {
     async function signIn() {
         const credentials =  {email, password}
 
-        const logged = await login(credentials)
 
-        if(logged){
-            router.push('/user/gallery')
+        try {
+            const logged = await login(credentials)
+            
+            const {token, user} = logged
+    
+            await sessionStorage.setItem('token', token)
+            await sessionStorage.setItem('user', JSON.stringify(user))
+    
+            if(logged){
+                router.push('/user/gallery')
+            }
+            
+        } catch (error) {
+            
         }
+        
 
     }
 

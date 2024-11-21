@@ -3,9 +3,6 @@ import { Jimp } from "jimp";
 import { IMagic } from "./interfaces/magic.interface";
 
 export default async function Magic(process: IMagic['process'], setUrlFile: IMagic['setUrlFile'], setUrlNewFile: IMagic['setUrlNewFile']) {
-
-    console.log(process)
-
     const reader = new FileReader();
 
     reader.onload = async (e) => {
@@ -75,8 +72,7 @@ export default async function Magic(process: IMagic['process'], setUrlFile: IMag
                 break;
         }
 
-        setUrlFile(URL.createObjectURL(new Blob([process.file])))
-        setUrlNewFile(await image.getBase64("image/png"))
+        setUrlNewFile(await image.getBase64("image/jpeg"))
 
         return
     };

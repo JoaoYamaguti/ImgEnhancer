@@ -17,16 +17,32 @@ export const login = async (credentials: { email: string, password: string }) =>
 
         const token = response.data.token
         const user = response.data.user
-    
-        await sessionStorage.setItem('token', token)
-        // await sessionStorage.setItem('user', user)
 
-        return true
+        return {token, user}
     } catch (error) {
         console.log(error);
         alert(error.response.data);
+        return 
     }
 }
+
+export const postImg = async (data: {filename:string, caught_file: string, new_file:string}) => {
+    const {filename, caught_file, new_file} = data
+
+    try {
+        const response = await axios.post('gallery', {
+            filename, caught_file, new_file
+        })
+
+        console.log(response.data)
+
+        return true
+    } catch (error) {
+        console.log(error)
+        return
+    }
+}
+
 
 export const getGallery = async (page: number) => {
     const token = sessionStorage.getItem('token')
@@ -46,5 +62,6 @@ export const getGallery = async (page: number) => {
         return response.data
     } catch (error) {
         console.log(error);
+        return
     }
 }
