@@ -5,7 +5,6 @@ axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export const login = async (credentials: { email: string, password: string }) => {
-    console.log(credentials)
     const {email, password} = credentials
 
     try {
@@ -13,16 +12,13 @@ export const login = async (credentials: { email: string, password: string }) =>
             email: email,
             password: password
         });
-        console.log(response);
 
         const token = response.data.token
         const user = response.data.user
 
         return {token, user}
     } catch (error) {
-        console.log(error);
-        alert(error.response.data);
-        return 
+        return error
     }
 }
 
@@ -34,12 +30,9 @@ export const postImg = async (data: {filename:string, caught_file: string, new_f
             filename, caught_file, new_file
         })
 
-        console.log(response.data)
-
-        return true
+        return response
     } catch (error) {
-        console.log(error)
-        return
+        return error
     }
 }
 
@@ -57,11 +50,9 @@ export const getGallery = async (page: number) => {
             },
             params:queryParams
         });
-        console.log(response);
 
         return response.data
     } catch (error) {
-        console.log(error);
-        return
+        return error
     }
 }
