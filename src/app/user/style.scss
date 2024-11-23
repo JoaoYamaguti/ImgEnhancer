@@ -1,7 +1,9 @@
 @use '../ui/styles/settings.module.scss' as *;
 
 .user {
+    block-size: 100vh;
 
-    margin:auto;
-    
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }

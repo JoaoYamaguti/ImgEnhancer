@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiFrown } from "react-icons/fi";
 
 import { ICard } from '@imgenhancer/app/lib/interfaces/card.interface'
 
@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation'
 export default function Page() {
     const router = useRouter()
 
-    const [gallery, setGallery] = useState<ICard[]>([])
+    const [gallery, setGallery] = useState<ICard[] | null>(null)
 
     const [showInfos, setShowInfos] = useState(false)
     const [cardInfos, setCardInfos] = useState({} as ICard)
@@ -45,33 +45,44 @@ export default function Page() {
     }, [page])
 
     return (
-        <>
+        <div className="gallery">
             {
-                (gallery.length) ? (
-                    <div className="gallery">
-                        <div className="panel" >
-                            {
-                                gallery.map((card, index) => <Card key={index} card={card} setShowInfos={setShowInfos} setCardInfos={setCardInfos} />)
-                            }
-                            {
-                                showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} />
-                            }
-                        </div >
-                        <div className="page">
-                            <FiChevronLeft onClick={() => {
-                                if (page - 1 != 0) setPage(page - 1)
-                            }} />
+                (gallery !== null) ? (
+                    (gallery.length !== 0) ? (
+                        <div className="container">
+                            <div className="sup">
+                                <div className="panel" >
+                                    {
+                                        gallery.map((card, index) => <Card key={index} card={card} setShowInfos={setShowInfos} setCardInfos={setCardInfos} />)
+                                    }
+                                </div >
+                            </div>
+                                {
+                                    showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} />
+                                }
+                            <div className="page">
+                                <FiChevronLeft onClick={() => {
+                                    if (page - 1 != 0) setPage(page - 1)
+                                }} />
 
-                            {page}
+                                {page}
 
-                            <FiChevronRight onClick={() => {
-                                if (page < (length / 6)) setPage(page + 1)
-                            }} />
+                                <FiChevronRight onClick={() => {
+                                    if (page < (length / 6)) setPage(page + 1)
+                                }} />
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className='noImg'>
+                            <FiFrown />
+                            <p>
+                                No image here <br /> Try enhance and save some images and go back here
+                            </p>
+                        </div>
+                    )
                 )
                     : (<Loading />)
             }
-        </>
+        </div>
     )
 }
