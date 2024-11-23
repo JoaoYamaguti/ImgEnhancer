@@ -4,8 +4,8 @@ axios.defaults.baseURL = 'http://localhost:3000';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-export const signup = async (user : {name: string, email: string, password: string}) => {
-    const {name, email,password} = user
+export const signup = async (user: { name: string, email: string, password: string }) => {
+    const { name, email, password } = user
 
     try {
         const response = await axios.post('/user', {
@@ -16,11 +16,10 @@ export const signup = async (user : {name: string, email: string, password: stri
     } catch (error) {
         return error
     }
-
 }
 
 export const login = async (credentials: { email: string, password: string }) => {
-    const {email, password} = credentials
+    const { email, password } = credentials
 
     try {
         const response = await axios.post('/session', {
@@ -31,14 +30,14 @@ export const login = async (credentials: { email: string, password: string }) =>
         const token = response.data.token
         const user = response.data.user
 
-        return {token, user}
+        return { token, user }
     } catch (error) {
         return error
     }
 }
 
-export const postImg = async (data: {filename:string, caught_file: string, new_file:string}) => {
-    const {filename, caught_file, new_file} = data
+export const postImg = async (data: { filename: string, caught_file: string, new_file: string }) => {
+    const { filename, caught_file, new_file } = data
 
     try {
         const response = await axios.post('gallery', {
@@ -63,7 +62,7 @@ export const getGallery = async (page: number) => {
             headers: {
                 Authorization: 'Bearer ' + token
             },
-            params:queryParams
+            params: queryParams
         });
 
         return response.data
