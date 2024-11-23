@@ -1,5 +1,4 @@
 
-import Back from "../ui/components/back";
 import Header from "../ui/components/header";
 
 import "./style.scss";
@@ -11,11 +10,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="session">
 
-        <div className="container">
+        {/* <div className="container"> */}
 
           {children}
 
-        </div>
+        {/* </div> */}
 
       </main>
     </>

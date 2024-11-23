@@ -12,9 +12,14 @@
     background-color: $foreground;
 
     .container {
+        height: 20rem;
+
         margin: auto;
     
         border-radius: 24px;
+
+        display: flex;
+        align-items: center;
     
         background-color: $background;
     

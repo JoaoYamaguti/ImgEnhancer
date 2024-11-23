@@ -4,6 +4,21 @@ axios.defaults.baseURL = 'http://localhost:3000';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+export const signup = async (user : {name: string, email: string, password: string}) => {
+    const {name, email,password} = user
+
+    try {
+        const response = await axios.post('/user', {
+            name, email, password
+        })
+
+        return response
+    } catch (error) {
+        return error
+    }
+
+}
+
 export const login = async (credentials: { email: string, password: string }) => {
     const {email, password} = credentials
 

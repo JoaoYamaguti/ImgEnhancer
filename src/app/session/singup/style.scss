@@ -1,16 +1,22 @@
 @use '../../ui/styles/settings.module.scss' as *;
 
 .signup {
+    height: 20rem;
+
+    margin: auto;
     padding: 3rem;
+    border-radius: 24px;
+
 
     display: flex;
-
     flex-flow: row nowrap;
-
     justify-content: space-between;
     align-items: center;
 
     gap: 2rem;
+
+    background-color: $background;
+
 
     .pages {
         flex-basis: 15rem;
@@ -59,6 +65,8 @@ form {
 
 @media (max-width: 40rem) {
     .signup {
+        height: auto;
+        
         padding: 2rem;
 
         flex-flow: column nowrap;
@@ -74,6 +82,7 @@ form {
             border-left: none;
 
             inline-size: 100%;
+            block-size: 100%;
             border-top: 1px solid $border-input-color;
         }
 

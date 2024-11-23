@@ -33,15 +33,11 @@ export default function Page() {
         if (data.status === 401) {
             sessionStorage.clear()
             router.push('/session/login')
+            return
         }
 
         setGallery(data.gallery)
         setLength(data.length)
-    }
-
-    function handlePage(op: "+" | "-") {
-        if (op === '-') setPage(page - 1)
-        if (op === '+') setPage(page + 1)
     }
 
     useEffect(() => {
