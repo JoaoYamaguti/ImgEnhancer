@@ -40,6 +40,12 @@ export default function Page() {
         setLength(data.length)
     }
 
+    function refresh() {
+        router.push('/')
+
+        router.push('/user/gallery')
+    }
+
     useEffect(() => {
         handleGallery()
     }, [page])
@@ -57,9 +63,9 @@ export default function Page() {
                                     }
                                 </div >
                             </div>
-                                {
-                                    showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} />
-                                }
+                            {
+                                showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} refreshCallback={handleGallery}/>
+                            }
                             <div className="page">
                                 <FiChevronLeft onClick={() => {
                                     if (page - 1 != 0) setPage(page - 1)

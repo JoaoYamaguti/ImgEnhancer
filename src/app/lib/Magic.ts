@@ -64,7 +64,7 @@ export default async function Magic(process: IMagic['process'], setNewFile: IMag
                 break;
 
             case 'scale':
-                image.scale(0.5)
+                image.scale(process.value ?? 0)
 
                 break;
 

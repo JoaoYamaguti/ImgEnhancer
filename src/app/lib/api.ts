@@ -75,3 +75,19 @@ export const getGallery = async (page: number) => {
         return error
     }
 }
+
+export const deleteImgInGallery = async (id: number) => {
+    const token = sessionStorage.getItem('token')
+
+    try {
+        const response = await axios.delete(`/gallery/${id}`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            },
+        })
+
+        return response
+    } catch (error) {
+        return error
+    }
+}

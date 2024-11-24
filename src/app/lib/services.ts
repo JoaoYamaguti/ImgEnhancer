@@ -82,7 +82,7 @@ export const services: IService[] = [
             type: 'number',
             value: 'value',
             min: 0.1,
-            max: 2,
+            max: 10,
         },]
     },
 ]

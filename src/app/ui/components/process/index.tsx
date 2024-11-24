@@ -19,7 +19,6 @@ interface ProcessParams {
 }
 
 export default function Process({ setVisibility, process }: ProcessParams) {
-    console.log(process)
     const user = JSON.parse(sessionStorage.getItem('user'))
 
     const [file, setfile] = useState('')
@@ -47,13 +46,10 @@ export default function Process({ setVisibility, process }: ProcessParams) {
     }
 
     async function saveImg() {
-        const [, base64File] = file.split(',')
-        const [, base64NewFile] = newFile.split(',')
-
         const data = {
             filename,
-            caught_file: base64File,
-            new_file: base64NewFile
+            caught_file: file,
+            new_file: newFile
         }
         const response = await postImg(data)
 
@@ -62,7 +58,6 @@ export default function Process({ setVisibility, process }: ProcessParams) {
 
     useEffect(() => {
         enhanceImg()
-
     }, [])
 
     return (

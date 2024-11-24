@@ -18,13 +18,13 @@
 
     background-color: rgba(0, 0, 0, 0.932);
     box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 3px 8px;
-       
-        svg{
-            align-self: flex-end;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-        }
+
+    svg {
+        align-self: flex-end;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+    }
 
     .content {
         padding: 1.5rem;
@@ -34,6 +34,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
+        gap: 1rem;
 
         background-color: $background;
 
@@ -41,10 +42,16 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: center;
+            align-items: center;
+            gap: 1rem;
 
             div {
                 display: flex;
                 flex-flow: column nowrap;
+
+                img{
+                    object-fit: contain;
+                }
 
                 a {
                     align-self: flex-end;
@@ -57,9 +64,80 @@
             }
         }
 
-        span {
-            font-size: 16px;
-            color: gray;
+        .legend {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+
+            span {
+                font-size: .8rem;
+                color: gray;
+            }
+
+            svg {
+                align-self: center;
+
+                width: 20px;
+                height: 20px;
+                transition: all 0.2s ;
+            }
+            svg:hover {
+                color: rgb(187, 0, 0);
+            }
+        }
+
+        .delete{
+            inline-size: 100vw;
+            block-size: 100vh;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: rgba(0, 0, 0, 0.534);
+            box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 3px 8px;
+
+            .content {
+                flex-basis: 15rem;
+
+                border-radius: 16px;
+                padding: 1rem;
+
+                background-color: $background;
+
+                p{
+
+                }
+
+                .btns {
+                    align-self: end;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .btn{
+                        border: 1px solid $border-input-color;
+                        border-radius: 10px;
+                        padding: .5rem;
+                        cursor: pointer;
+
+                        font-weight: bold;
+
+                    }
+                    .del {
+                        background-color: rgb(207, 0, 0);
+                        color: white
+                    }
+                }
+            }
+
         }
     }
 }
