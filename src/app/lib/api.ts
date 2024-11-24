@@ -38,18 +38,23 @@ export const login = async (credentials: { email: string, password: string }) =>
 
 export const postImg = async (data: { filename: string, caught_file: string, new_file: string }) => {
     const { filename, caught_file, new_file } = data
+    const token = sessionStorage.getItem('token')
+
 
     try {
-        const response = await axios.post('gallery', {
+        const response = await axios.post('/gallery', {
             filename, caught_file, new_file
-        })
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        },)
 
         return response
     } catch (error) {
         return error
     }
 }
-
 
 export const getGallery = async (page: number) => {
     const token = sessionStorage.getItem('token')

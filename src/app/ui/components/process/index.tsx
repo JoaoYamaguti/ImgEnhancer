@@ -19,48 +19,55 @@ interface ProcessParams {
 }
 
 export default function Process({ setVisibility, process }: ProcessParams) {
-    const [urlFile, setUrlFile] = useState('')
-    const [urlNewFile, setUrlNewFile] = useState('')
+    console.log(process)
+    const user = JSON.parse(sessionStorage.getItem('user'))
 
-
+    const [file, setfile] = useState('')
+    const [newFile, setNewFile] = useState('')
 
     const [filename,] = process.file.name.split('.')
 
-    async function saveImg() {
-
-        console.log(urlFile)
-        console.log(urlNewFile)
-
-        const data = {
-            filename,
-            caught_file: urlFile,
-            new_file: urlNewFile
-        }
-        const response = await postImg(data)
-
-        if (response) return alert("img saved")
-    }
-
-    useEffect(() => {
+    async function BlobtoBase64(blob: Blob, callback: Dispatch<SetStateAction<string>>) {
         const r = new FileReader();
         r.onload = async (e) => {
-            setUrlFile(e.target?.result)
+            callback(e.target?.result)
         }
-        r.readAsDataURL(process.file)
+        r.readAsDataURL(blob)
+    }
 
+    async function enhanceImg() {
         try {
-            if (process !== undefined) {
-                Magic(process, setUrlFile, setUrlNewFile)
-            }
+            BlobtoBase64(process.file, setfile)
+
+            await Magic(process, setNewFile)
 
         } catch (error) {
             console.log(error)
         }
-    }, [process])
+    }
+
+    async function saveImg() {
+        const [, base64File] = file.split(',')
+        const [, base64NewFile] = newFile.split(',')
+
+        const data = {
+            filename,
+            caught_file: base64File,
+            new_file: base64NewFile
+        }
+        const response = await postImg(data)
+
+        if (response) return console.log(response)
+    }
+
+    useEffect(() => {
+        enhanceImg()
+
+    }, [])
 
     return (
         <>
-            {urlNewFile ? (
+            {newFile ? (
                 <div className={styles.process} onClick={() => { setVisibility(false) }}>
                     <main onClick={(event) => event.stopPropagation()}>
                         <div className={styles.close} onClick={() => { setVisibility(false) }}></div>
@@ -70,7 +77,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
                                     <div>
                                         <span>Attached Image:</span>
                                         {<Image
-                                            src={urlFile}
+                                            src={file}
                                             alt={'old image'}
                                             width={240}
                                             height={240}
@@ -80,7 +87,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
                                     <div>
                                         <span>New Image:</span>
                                         {<Image
-                                            src={urlNewFile}
+                                            src={newFile}
                                             alt={'new image'}
                                             width={240}
                                             height={240}
@@ -88,7 +95,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
                                     </div>
                                 </div>
 
-                                <a href={urlNewFile} download>
+                                <a href={newFile} download>
                                     <Image
                                         src={'/download-direto-w.png'}
                                         alt='download'
@@ -101,14 +108,18 @@ export default function Process({ setVisibility, process }: ProcessParams) {
 
                             <hr />
 
-                            <section className={styles.login}>
-                                <span>Would you like save your images?</span>
-                                <button type='button' onClick={saveImg}>
-                                    {/* <Link href={'/session/login'}>  */}
-                                    Login or Sing In
-                                    {/* </Link> */}
-                                </button>
-                            </section>
+                            {
+                                user ? (
+                                    <button type='button' onClick={saveImg}>
+                                        Save Image
+                                    </button>
+                                ) : (
+                                    <section className={styles.login}>
+                                        <span>Would you like save your images?</span>
+                                        <Link href={'/session/login'}>Login or Sing In</Link>
+                                    </section>
+                                )
+                            }
                         </div>
                     </main>
                 </div>

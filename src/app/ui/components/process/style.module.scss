@@ -51,7 +51,7 @@
     
     .content {
         @include flex-v-center;
-        gap: 2rem;
+        gap: 1rem;
         
         .response {
             @include flex-v-center;
@@ -80,15 +80,11 @@
             }
 
             a {
-                // align-self: flex-end;
-                
                 @include button($download-color);
     
                 display: flex;
                 justify-content: center;
                 align-items: center;
-    
-                // margin-right: 2rem;
     
                 border: none;
                 border-radius: 24px;
