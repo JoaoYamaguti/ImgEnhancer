@@ -4,8 +4,10 @@ import './style.scss'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { login } from '@imgenhancer/app/lib/api'
+import { useNotifications } from '@imgenhancer/app/ui/context/NotificationContext'
 
 export default function Page() {
+    const {addNotification} = useNotifications()
 
     const router = useRouter()
 
@@ -27,8 +29,12 @@ export default function Page() {
             router.push('/user/gallery')
         }
 
-        if (logged.status) {
-            alert(logged.response.data);
+        if (logged.status !== 200) {
+            console.log(logged)
+            addNotification({
+                status: logged.status,
+                menssage: logged.response.data.message[0]
+            })
         }
     }
 

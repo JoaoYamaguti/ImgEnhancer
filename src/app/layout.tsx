@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
 
-import "./globals.scss";
+import { NotificationProvider } from '../app/ui/context/NotificationContext';
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import "./globals.scss";
+import Notifications from "./ui/components/notifications";
 
 export const metadata: Metadata = {
   title: "ImgEnhancer",
@@ -23,18 +15,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
-      <body
-      // className={`${geistSans.variable} ${geistMono.variable}`}
-      >
-        <main className="main-container">
+    <NotificationProvider>
+      <html lang="en">
+        <body
+        >
+          <main className="main-container">
 
-          {children}
+            {children}
 
-        </main>
-        
-      </body>
-    </html>
+          <Notifications />
+          </main>
+
+
+        </body>
+      </html >
+    </NotificationProvider>
   );
 }

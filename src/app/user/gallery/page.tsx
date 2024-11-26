@@ -40,12 +40,6 @@ export default function Page() {
         setLength(data.length)
     }
 
-    function refresh() {
-        router.push('/')
-
-        router.push('/user/gallery')
-    }
-
     useEffect(() => {
         handleGallery()
     }, [page])

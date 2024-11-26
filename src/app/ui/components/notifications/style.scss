@@ -1,0 +1,60 @@
+@use '../../styles/settings.module.scss' as *;
+
+.notifications {
+  padding: 0.5rem;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.notification {
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+  width: 200px;
+  color: black;
+  font-size: 14px;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.title{
+  inline-size: 100%;
+
+  border-bottom:1px solid  ;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 1rem;
+
+  text-transform: capitalize;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.success {
+  color: #4caf50;
+  border-bottom:1px solid #4caf50 ;
+}
+
+.error {
+  color: #f44336;
+  border-bottom:1px solid #f44336;
+}
+
+.info {
+  color: #2196f3;
+  border-bottom:1px solid  ;
+}
