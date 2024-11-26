@@ -5,7 +5,6 @@ import './style.scss'
 import { login, signup } from '@imgenhancer/app/lib/api'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { unlink } from 'fs'
 
 export default function Page() {
 
