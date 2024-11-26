@@ -2,18 +2,19 @@
 import Image from 'next/image'
 import Link from "next/link";
 
-import styles from "./page.module.scss";
+import { useNotifications } from '../app/ui/context/NotificationContext';
+
 import Footer from './ui/components/footer';
 import Header from './ui/components/header';
 
-import { useNotifications } from '../app/ui/context/NotificationContext';
+import styles from "./page.module.scss";
 
 export default function Home() {
   const { addNotification } = useNotifications();
 
   const handleSuccessNotification = async() => {
-    // await addNotification({status:'success', message:'Sucesso na página inicial!'});
-    await addNotification({status:'error', message:'Sucesso na página inicial!'});
+    // await addNotification(status:'success', message:'Sucesso na página inicial!');
+    addNotification('error', 'Sucesso na página inicial!');
 
   };
 

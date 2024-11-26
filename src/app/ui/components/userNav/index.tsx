@@ -1,10 +1,10 @@
+import Link from "next/link";
+
 import { FiUser, FiLogOut } from "react-icons/fi";
 
 import './style.scss'
-import Link from "next/link";
 
-function UserNav() {
-
+export default function UserNav() {
     function logout() {
         sessionStorage.clear()
     }
@@ -21,5 +21,3 @@ function UserNav() {
         </div>
     )
 }
-
-export default UserNav

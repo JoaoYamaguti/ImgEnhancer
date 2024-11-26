@@ -15,7 +15,7 @@ export default function Number({ label, min, max, setValue }: IOptionParams) {
             setValid(true)
         }
 
-        setValue(val)
+        if (setValue !== undefined ) setValue(val)
     }
 
     return (

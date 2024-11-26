@@ -4,39 +4,39 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import Loading from '../loading'
-
-import Magic from '@imgenhancer/app/lib/Magic'
-
 import { IProcess } from "../../../lib/interfaces/process.interface";
 
-import styles from './style.module.scss'
 import { postImg } from '@imgenhancer/app/lib/api'
+import Magic from '@imgenhancer/app/lib/Magic'
+
+import Loading from '../loading'
+
+import styles from './style.module.scss'
 
 interface ProcessParams {
     setVisibility: Dispatch<SetStateAction<boolean>>
     process: Partial<IProcess>
 }
 
-export default function Process({ setVisibility, process }: ProcessParams) {
+export default function Process({ setVisibility, process }: ProcessParams) {    
     const user = JSON.parse(sessionStorage.getItem('user'))
 
     const [file, setfile] = useState('')
     const [newFile, setNewFile] = useState('')
 
-    const [filename,] = process.file.name.split('.')
-
     async function BlobtoBase64(blob: Blob, callback: Dispatch<SetStateAction<string>>) {
         const r = new FileReader();
         r.onload = async (e) => {
-            callback(e.target?.result)
+            const base64 = e.target?.result
+
+            callback(base64 as string)
         }
         r.readAsDataURL(blob)
     }
 
     async function enhanceImg() {
         try {
-            BlobtoBase64(process.file, setfile)
+            if (process.file !== undefined) BlobtoBase64(process.file, setfile)
 
             await Magic(process, setNewFile)
 
@@ -46,6 +46,10 @@ export default function Process({ setVisibility, process }: ProcessParams) {
     }
 
     async function saveImg() {
+        let filename = ""
+
+        if (process.file !== undefined) {filename = process.file.name.split('.')[0]}
+
         const data = {
             filename,
             caught_file: file,
@@ -53,7 +57,11 @@ export default function Process({ setVisibility, process }: ProcessParams) {
         }
         const response = await postImg(data)
 
-        if (response) return console.log(response)
+        if (response) {
+            console.log(response)
+            // addNotification('', 'Sucesso na página inicial!');
+            return
+        }
     }
 
     useEffect(() => {

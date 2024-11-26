@@ -1,12 +1,12 @@
 import Image from "next/image";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { ICard } from "@imgenhancer/app/lib/interfaces/card.interface";
 
+import { deleteImgInGallery } from "@imgenhancer/app/lib/api";
 import { FiXCircle, FiDownload, FiTrash2 } from "react-icons/fi";
 
 import './style.scss'
-import { Dispatch, SetStateAction, useState } from "react";
-import { deleteImgInGallery } from "@imgenhancer/app/lib/api";
 
 interface IInfosParams {
     card: ICard
@@ -21,12 +21,15 @@ export default function Infos({ card, setShowInfos, refreshCallback }: IInfosPar
         await deleteImgInGallery(card.id)
 
         refreshCallback()
+        setShowInfos(false)
     }
 
     return (
         <div className="infos" onClick={() => setShowInfos(false)}>
             <div className="content" onClick={(event) => event.stopPropagation()}>
-                <FiXCircle onClick={() => setShowInfos(false)} />
+                <div onClick={() => setShowInfos(false)}>
+                    <FiXCircle />
+                </div>
                 <div className='figures'>
                     <div>
                         <span>Atteched Image:</span>
@@ -60,7 +63,9 @@ export default function Infos({ card, setShowInfos, refreshCallback }: IInfosPar
                         <h2>{card.filename}</h2>
                         <span>{new Date(card.created_at).toLocaleDateString("pt-br")}</span>
                     </div>
-                    <FiTrash2 onClick={()=> setShowDeleteComponent(true)}/>
+                    <div onClick={() => setShowDeleteComponent(true)}>
+                        <FiTrash2 />
+                    </div>
                     {
                         showDeleteComponent && (
                             <div className="delete" onClick={()=> setShowDeleteComponent(false)}>

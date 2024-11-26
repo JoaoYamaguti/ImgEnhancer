@@ -31,10 +31,7 @@ export default function Page() {
 
         if (logged.status !== 200) {
             console.log(logged)
-            addNotification({
-                status: logged.status,
-                menssage: logged.response.data.message[0]
-            })
+            // addNotification(logged.status, logged.response.data.message[0]})
         }
     }
 

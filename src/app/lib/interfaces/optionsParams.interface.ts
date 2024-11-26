@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction } from "react"
 
 interface IOptionParams {
     label?: string
-    value?: number | null
+    value?: number
     setValue?:Dispatch<SetStateAction<number>>
-    min?: number | null
-    max?: number | null
+    min?: number
+    max?: number
     options?: number[]
 
 }

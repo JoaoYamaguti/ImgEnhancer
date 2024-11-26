@@ -6,6 +6,6 @@ export interface INotification {
 
 export type INotificationContext = {
     notifications: INotification[]
-    addNotification: (notif: INotification) => void
+    addNotification: (status: string, message: string) => void
     removeNotification: (id: number) => void
 }

@@ -19,11 +19,17 @@ export default function Page() {
 
     async function createUser() {
 
-        if (name === '' || email === '' || password === '') return alert('Please, insert all information')
-            // addNotification({status:'error', message: 'Please, insert all information'})
+        if (name === '' || email === '' || password === '') {
+            alert('Please, insert all information')
+            // addNotification('error', 'Please, insert all information')
+            return 
+        }
 
-        if (password !== cPassword) return alert('Confirme Passowrd does not match')
-            // addNotification({status:'error', message: 'Confirme Passowrd does not match'})
+        if (password !== cPassword) {
+            alert('Confirme Passowrd does not match')
+            // addNotification('error', 'Confirme Passowrd does not match')
+            return
+        }
 
         const infos = {
             name,
@@ -33,10 +39,13 @@ export default function Page() {
 
         const data = await signup(infos)
 
-        if (data.status === 400) return alert(`${data.status} -${data.response.data.message.map((e) => ` ${e}`)}`)
+        if (data.status === 400) {
+            alert(`${data.status} -${data.response.data.message.map((e) => ` ${e}`)}`)
             // {
-            //     data.response.data.message.map((e) => addNotification({status:'error', message: `${data.status} - ${e}`}))
+            //     data.response.data.message.map((e) => addNotification('error', `${data.status} - ${e}`))
             // }
+            return 
+        }
 
         const logged = await login({email, password})
 
@@ -45,16 +54,14 @@ export default function Page() {
         await sessionStorage.setItem('token', token)
         await sessionStorage.setItem('user', JSON.stringify(user))
 
+        if (logged.status) {
+            alert(logged.response.data);
+            // data.response.data.message.map((e) => addNotification('error', `${data.status} - ${e}`))
+        }
+
         if (logged.token) {
             console.log(logged)
             router.push('/user/gallery')
-        }
-
-        if (logged.status) {
-            alert(logged.response.data);
-            // {
-            //     data.response.data.message.map((e) => addNotification({status:'error', message: `${data.status} - ${e}`}))
-            // }
         }
     }
 
