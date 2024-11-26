@@ -24,8 +24,8 @@ export const services: IService[] = [
         components: [{
             type: 'number',
             value: 'value',
-            min: -1,
-            max: 1,
+            min: 1,
+            max: 10,
         }]
     },
     {

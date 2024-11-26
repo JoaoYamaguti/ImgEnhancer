@@ -9,17 +9,22 @@
 }
 
 .notification {
+  width: 200px;
+
   padding: 10px;
   border-radius: 5px;
+
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: start;
   gap: 0.5rem;
-  width: 200px;
+
+  z-index: 1000;
+
+  background-color: $background;
   color: black;
   font-size: 14px;
-  z-index: 1000;
   transition: opacity 0.3s ease;
 }
 

@@ -21,26 +21,25 @@ export default function Page() {
 
         const { token, user } = logged
 
-        await sessionStorage.setItem('token', token)
-        await sessionStorage.setItem('user', JSON.stringify(user))
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('user', user)
 
         if (logged.token) {
             console.log(logged)
             router.push('/user/gallery')
         }
 
-        if (logged.status !== 200) {
+        if (logged.status !== 200 && logged.message?.length && logged.status) {
             console.log(logged)
-            // addNotification(logged.status, logged.response.data.message[0]})
+
+            addNotification('success', `${logged.status} - ${logged.message[0]}`)
         }
     }
 
     return (
         <div className="login">
             <form action="">
-                {/* <label htmlFor="email">E-mail:</label> */}
                 <input type="email" name="email" id="email" placeholder='E-mail' onChange={(e) => setEmail(e.target.value)} />
-                {/* <label htmlFor="password">Password:</label> */}
                 <input type="password" name="password" id="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
                 <button type="button" onClick={signIn}>Sign In</button>
             </form>

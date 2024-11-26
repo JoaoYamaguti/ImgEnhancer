@@ -44,7 +44,6 @@ export default function Page() {
     const handleOption = (option: string) => {
         setOption(option)
 
-        // setService(services.find((s) => s.service === option))
         const choosedService = (services.find((s) => s.service === option) as IService) ?? null;
         setService(choosedService || { component: null })
 
@@ -57,8 +56,8 @@ export default function Page() {
     const handleFile = (file: IProcess['file']) => {
 
         if (file === undefined || file === null) {
-            return alert('Attach a valid Image. (.jpeg, .png, .svg)')
-            // return addNotification({status: "error", message: "Attach a valid Image. (.jpeg, .png, .svg)"})
+            addNotification("error", "Attach a valid Image. (.jpeg, .png, .svg)")
+            return
         }
 
         const types = ['jpeg', 'png', 'svg']
@@ -68,8 +67,7 @@ export default function Page() {
         if (types.includes(type)) {
             setFile(file)
         } else {
-            alert('Attach a valid Image. (.jpeg, .png, .svg)')
-            // addNotification({status: "error", message: "Attach a valid Image. (.jpeg, .png, .svg)"})
+            addNotification("error", "Attach a valid Image. (.jpeg, .png, .svg)")
         }
     }
 
@@ -80,45 +78,42 @@ export default function Page() {
             if (option) {
                 processObj.service = option
             } else {
-                alert('Make sure you had chosen a option.')
-                // addNotification({status: "error", message: "Make sure you had chosen a option."})
+                addNotification("error","Make sure you had chosen a option.")
                 return
             }
             if (file) {
                 processObj.file = file
             } else {
-                alert('Make sure you had attached a file.')
-                // addNotification({status: "error", message: "Make sure you had attached a file."})
+                addNotification("error", "Make sure you had attached a file.")
                 return
             }
-            if (value || value === 0) {
+            if (value) {
                 const valueIsValid = isValid('value', value)
 
                 if (valueIsValid) {
                     processObj.value = value
                 } else {
-                    alert(`Input a valid value`)
-                    // addNotification({status: "error", message: "Input a valid value"})
+                    addNotification("error", "Input a valid value")
                     return
                 }
             }
-            if (width || width === 0) {
+            if (width) {
                 const widthIsValid = isValid('width', width)
 
                 if (widthIsValid) {
                     processObj.width = width
                 } else {
-                    alert('Input a valid value')
+                    addNotification("error", "Input a valid width")
                     return
                 }
             }
-            if (height || height === 0) {
+            if (height) {
                 const heightIsValid = isValid('height', height)
 
                 if (heightIsValid) {
                     processObj.height = height
                 } else {
-                    alert('Input a valid value')
+                    addNotification("error", "Input a valid height")
                     return
                 }
             }
@@ -130,7 +125,7 @@ export default function Page() {
 
     function isValid(label: string, value: number) {
         const component = service.components && service.components.find((c) => c.value === label) as IComponent
-        if (component === undefined) return alert(`${label} component does not found`)
+        if (component === undefined) return console.log(`${label} component does not found`)
         if (component.min === undefined || component.max === undefined) return
         if (value < component.min || value > component.max) {
             return false
