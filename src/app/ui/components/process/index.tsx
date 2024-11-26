@@ -15,7 +15,7 @@ import { postImg } from '@imgenhancer/app/lib/api'
 
 interface ProcessParams {
     setVisibility: Dispatch<SetStateAction<boolean>>
-    process: IProcess
+    process: Partial<IProcess>
 }
 
 export default function Process({ setVisibility, process }: ProcessParams) {

@@ -13,7 +13,6 @@ interface INotification {
 }
 
 const Notification = ({ status, message, onClose }: INotification) => {
-
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
@@ -35,22 +34,22 @@ const Notification = ({ status, message, onClose }: INotification) => {
     );
 };
 
-const Notifications = () => {
+export default function Notifications() {
     const { notifications, removeNotification } = useNotifications();
     console.log(notifications)
 
     return (
         <div className="notifications">
-            {notifications.map((notification) => (
-                <Notification
-                    key={notification.id}
-                    status={notification.status}
-                    message={notification.message}
-                    onClose={() => removeNotification(notification.id)}
-                />
-            ))}
+            {
+                notifications.map((notification) => (
+                    <Notification
+                        key={notification.id}
+                        status={notification.status}
+                        message={notification.message}
+                        onClose={() => removeNotification(notification.id)}
+                    />
+                ))
+            }
         </div>
     );
 };
-
-export default Notifications;

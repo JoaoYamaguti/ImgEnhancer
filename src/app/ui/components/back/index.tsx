@@ -16,14 +16,5 @@ export default function Back() {
                 alt="back to home"
             />
         </Link>
-
-        // <div onClick={() => router.push("/")}>
-        //     <Image
-        //         src={'/voltar-50-b.png'}
-        //         width={30}
-        //         height={30}
-        //         alt="back to home"
-        //     />
-        // </div>
     )
 }

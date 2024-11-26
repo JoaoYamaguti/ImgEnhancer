@@ -2,24 +2,27 @@
 
 import { useState } from "react";
 
+import { useNotifications } from "../ui/context/NotificationContext";
+
+import Header from "../ui/components/header";
 import Process from '../ui/components/process'
 import Number from "../ui/components/number";
 import Rotate from "../ui/components/rotate";
 
 import { services } from '@imgenhancer/app/lib/services'
 
-import { IService } from "../lib/interfaces/service.interface";
+import { IComponent, IService } from "../lib/interfaces/service.interface";
 import { IProcess } from "../lib/interfaces/process.interface";
 
 import styles from './style.module.scss'
-import Header from "../ui/components/header";
 
 export default function Page() {
+    const {addNotification} = useNotifications()
 
     const options: string[] = ['']
     services.forEach((s) => options.push(s.service))
 
-    const [process, setProcess] = useState({} as IProcess)
+    const [process, setProcess] = useState<Partial<IProcess>>({})
 
     const [option, setOption] = useState('')
     const [service, setService] = useState<IService>({
@@ -32,9 +35,9 @@ export default function Page() {
             options: [],
         }],
     })
-    const [value, setValue] = useState<null | number>(null)
-    const [width, setWidth] = useState<null | number>(null)
-    const [height, setHeight] = useState<null | number>(null)
+    const [value, setValue] = useState(0)
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
     const [file, setFile] = useState<IProcess['file'] | null>(null)
     const [visibility, setVisibility] = useState(false)
 
@@ -45,16 +48,17 @@ export default function Page() {
         const choosedService = (services.find((s) => s.service === option) as IService) ?? null;
         setService(choosedService || { component: null })
 
-        setProcess({} as IProcess)
-        setValue(null)
-        setWidth(null)
-        setHeight(null)
+        setProcess({})
+        setValue(0)
+        setWidth(0)
+        setHeight(0)
     }
 
     const handleFile = (file: IProcess['file']) => {
 
         if (file === undefined || file === null) {
             return alert('Attach a valid Image. (.jpeg, .png, .svg)')
+            // return addNotification({status: "error", message: "Attach a valid Image. (.jpeg, .png, .svg)"})
         }
 
         const types = ['jpeg', 'png', 'svg']
@@ -65,6 +69,7 @@ export default function Page() {
             setFile(file)
         } else {
             alert('Attach a valid Image. (.jpeg, .png, .svg)')
+            // addNotification({status: "error", message: "Attach a valid Image. (.jpeg, .png, .svg)"})
         }
     }
 
@@ -76,12 +81,14 @@ export default function Page() {
                 processObj.service = option
             } else {
                 alert('Make sure you had chosen a option.')
+                // addNotification({status: "error", message: "Make sure you had chosen a option."})
                 return
             }
             if (file) {
                 processObj.file = file
             } else {
                 alert('Make sure you had attached a file.')
+                // addNotification({status: "error", message: "Make sure you had attached a file."})
                 return
             }
             if (value || value === 0) {
@@ -91,6 +98,7 @@ export default function Page() {
                     processObj.value = value
                 } else {
                     alert(`Input a valid value`)
+                    // addNotification({status: "error", message: "Input a valid value"})
                     return
                 }
             }
@@ -121,8 +129,9 @@ export default function Page() {
     }
 
     function isValid(label: string, value: number) {
-        const component = service.components && service.components.find((c) => c.value === label) as IService['components']
-        if (component === undefined) { return alert(`${label} component does not found`) }
+        const component = service.components && service.components.find((c) => c.value === label) as IComponent
+        if (component === undefined) return alert(`${label} component does not found`)
+        if (component.min === undefined || component.max === undefined) return
         if (value < component.min || value > component.max) {
             return false
         } else {
