@@ -12,14 +12,17 @@ import Magic from '@imgenhancer/app/lib/Magic'
 import Loading from '../loading'
 
 import styles from './style.module.scss'
+import { useNotifications } from '../../context/NotificationContext';
 
 interface ProcessParams {
     setVisibility: Dispatch<SetStateAction<boolean>>
     process: Partial<IProcess>
 }
 
-export default function Process({ setVisibility, process }: ProcessParams) {    
-    const user = JSON.parse(sessionStorage.getItem('user'))
+export default function Process({ setVisibility, process }: ProcessParams) {   
+    const {addNotification} = useNotifications()
+    
+    const user = JSON.parse(sessionStorage.getItem('user') as string)
 
     const [file, setfile] = useState('')
     const [newFile, setNewFile] = useState('')
@@ -58,14 +61,15 @@ export default function Process({ setVisibility, process }: ProcessParams) {
         const response = await postImg(data)
 
         if (response) {
-            console.log(response)
-            // addNotification('', 'Sucesso na página inicial!');
+            addNotification('success', "Image saved.")
             return
         }
+
     }
 
     useEffect(() => {
         enhanceImg()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

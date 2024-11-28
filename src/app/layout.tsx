@@ -17,20 +17,21 @@ export default function RootLayout({
 }>) {
 
   return (
-    <NotificationProvider>
-      <html lang="en">
-        <body
-        >
+    <html lang="en">
+      <body
+      >
+        <NotificationProvider>
+
           <main className="main-container">
 
             {children}
 
-          <Notifications />
+            <Notifications />
           </main>
 
+        </NotificationProvider>
 
-        </body>
-      </html >
-    </NotificationProvider>
+      </body>
+    </html >
   );
 }

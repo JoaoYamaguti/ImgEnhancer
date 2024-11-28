@@ -20,14 +20,12 @@ export default function Page() {
     async function createUser() {
 
         if (name === '' || email === '' || password === '') {
-            alert('Please, insert all information')
-            // addNotification('error', 'Please, insert all information')
-            return 
+            addNotification('error', 'Please, insert all information')
+            return
         }
 
         if (password !== cPassword) {
-            alert('Confirme Passowrd does not match')
-            // addNotification('error', 'Confirme Passowrd does not match')
+            addNotification('error', 'Confirme Passowrd does not match')
             return
         }
 
@@ -37,31 +35,36 @@ export default function Page() {
             password
         }
 
-        const data = await signup(infos)
+        const sign = await signup(infos)
 
-        if (data.status === 400) {
-            alert(`${data.status} -${data.response.data.message.map((e) => ` ${e}`)}`)
-            // {
-            //     data.response.data.message.map((e) => addNotification('error', `${data.status} - ${e}`))
-            // }
-            return 
+        console.log(sign)
+
+        if (sign.message?.length && sign.status) {
+            console.log(sign.message)
+            const arr = [...sign.message]
+            arr.forEach((m: string) => {
+                console.log(m)
+                addNotification('error', `${sign.status} - ${m}`)
+            })
+            return
         }
 
-        const logged = await login({email, password})
+        const logged = await login({ email, password })
 
         const { token, user } = logged
 
-        await sessionStorage.setItem('token', token)
-        await sessionStorage.setItem('user', JSON.stringify(user))
-
-        if (logged.status) {
-            alert(logged.response.data);
-            // data.response.data.message.map((e) => addNotification('error', `${data.status} - ${e}`))
-        }
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('user', user)
 
         if (logged.token) {
             console.log(logged)
             router.push('/user/gallery')
+        }
+
+        if (logged.status !== 200 && logged.message?.length && logged.status) {
+            console.log(logged)
+
+            addNotification('error', `${logged.status} - ${logged.message[0]}`)
         }
     }
 

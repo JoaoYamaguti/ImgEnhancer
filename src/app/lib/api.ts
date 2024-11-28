@@ -1,11 +1,10 @@
 import axios from "axios";
 import { IApiResponse, IApiResponseError } from "./interfaces/apiResponse.interface";
 
-axios.defaults.baseURL = 'http://localhost:3000';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.baseURL = process.env.DATABASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-export const signup = async (user: { name: string, email: string, password: string }) => {
+export const signup = async (user: { name: string, email: string, password: string }): Promise<IApiResponse> => {
     const { name, email, password } = user
 
     try {
@@ -13,9 +12,19 @@ export const signup = async (user: { name: string, email: string, password: stri
             name, email, password
         })
 
-        return response
+        const token = ''
+        const user = JSON.stringify(response.data.user)
+
+        return { token, user }
     } catch (error) {
-        return error
+        console.log(error)
+        const err = error as IApiResponseError
+        return {
+            token: '',
+            user: '',
+            status: err.status,
+            message: err.response.data.message
+        }
     }
 }
 
@@ -28,17 +37,17 @@ export const login = async (credentials: { email: string, password: string }): P
             password: password
         });
 
-        const token = response.data.token 
+        const token = response.data.token
         const user = JSON.stringify(response.data.user)
 
         return { token, user }
     } catch (error) {
-        const abc = error as IApiResponseError
+        const err = error as IApiResponseError
         return {
             token: '',
             user: '',
-            status: abc.status,
-            message: abc.response.data.message 
+            status: err.status,
+            message: err.response.data.message
         }
     }
 }

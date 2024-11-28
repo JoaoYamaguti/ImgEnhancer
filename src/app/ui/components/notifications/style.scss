@@ -6,6 +6,8 @@
   position: absolute;
   right: 0;
   bottom: 0;
+
+  z-index: 1000;
 }
 
 .notification {
@@ -20,33 +22,22 @@
   align-items: start;
   gap: 0.5rem;
 
-  z-index: 1000;
 
   background-color: $background;
   color: black;
   font-size: 14px;
-  transition: opacity 0.3s ease;
 }
 
 .title{
   inline-size: 100%;
 
-  border-bottom:1px solid  ;
-
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  gap: 1rem;
+  gap: .8rem;
 
   text-transform: capitalize;
-}
-
-button {
-  background: none;
-  border: none;
-  color: white;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .success {

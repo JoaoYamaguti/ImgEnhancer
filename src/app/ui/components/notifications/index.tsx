@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNotifications } from '../../context/NotificationContext';
 
-import { FiInfo, FiAlertCircle, FiCheckCircle } from "react-icons/fi";
+import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
 import './style.scss'
 

@@ -38,6 +38,10 @@
 
         background-color: $background;
 
+        .cancel {
+            align-self: end;
+        }
+
         .figures {
             display: flex;
             flex-flow: row wrap;

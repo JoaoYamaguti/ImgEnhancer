@@ -7,6 +7,7 @@ import { deleteImgInGallery } from "@imgenhancer/app/lib/api";
 import { FiXCircle, FiDownload, FiTrash2 } from "react-icons/fi";
 
 import './style.scss'
+import { useNotifications } from "../../context/NotificationContext";
 
 interface IInfosParams {
     card: ICard
@@ -15,19 +16,21 @@ interface IInfosParams {
 }
 
 export default function Infos({ card, setShowInfos, refreshCallback }: IInfosParams) {
+    const {addNotification} = useNotifications()
     const [showDeleteComponent, setShowDeleteComponent] = useState(false)
 
     async function deleteImg() {
         await deleteImgInGallery(card.id)
 
         refreshCallback()
+        addNotification('success', "Image deleted.")
         setShowInfos(false)
     }
 
     return (
         <div className="infos" onClick={() => setShowInfos(false)}>
             <div className="content" onClick={(event) => event.stopPropagation()}>
-                <div onClick={() => setShowInfos(false)}>
+                <div onClick={() => setShowInfos(false)} className="cancel">
                     <FiXCircle />
                 </div>
                 <div className='figures'>

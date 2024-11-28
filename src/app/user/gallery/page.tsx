@@ -47,8 +47,8 @@ export default function Page() {
     return (
         <div className="gallery">
             {
-                (gallery !== null) ? (
-                    (gallery.length !== 0) ? (
+                (gallery !== null && gallery !== undefined) ? (
+                    (gallery.length) ? (
                         <div className="container">
                             <div className="sup">
                                 <div className="panel" >
@@ -58,21 +58,24 @@ export default function Page() {
                                 </div >
                             </div>
                             {
-                                showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} refreshCallback={handleGallery}/>
+                                showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} refreshCallback={handleGallery} />
                             }
                             <div className="page">
                                 <div onClick={() => {
-                                        if (page - 1 != 0) setPage(page - 1)
-                                    }}>
-                                    <FiChevronLeft  />
+                                    if (page - 1 != 0) setPage(page - 1)
+                                    setGallery(null)
+
+                                }}>
+                                    <FiChevronLeft />
                                 </div>
 
                                 {page}
 
                                 <div onClick={() => {
-                                        if (page < (length / 6)) setPage(page + 1)
-                                    }}>
-                                    <FiChevronRight  />
+                                    if (page < (length / 6)) setPage(page + 1)
+                                    setGallery(null)
+                                }}>
+                                    <FiChevronRight />
                                 </div>
                             </div>
                         </div>
