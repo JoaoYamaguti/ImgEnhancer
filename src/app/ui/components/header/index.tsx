@@ -3,15 +3,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import styles from "./style.module.scss";
 import UserNav from "../userNav";
+
+import styles from "./style.module.scss";
 
 export default function Header() {
 
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        setUser(sessionStorage.getItem('user'))
+        setUser(JSON.parse(sessionStorage.getItem('user') as string))
     },[])
 
     return (

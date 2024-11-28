@@ -75,5 +75,5 @@ export default async function Magic(process: IMagic['process'], setNewFile: IMag
         setNewFile(await image.getBase64("image/png"))
     };
 
-    reader.readAsArrayBuffer(process.file);
+    if (process.file) reader.readAsArrayBuffer(process.file);
 }
