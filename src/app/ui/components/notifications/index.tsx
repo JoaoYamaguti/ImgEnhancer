@@ -36,7 +36,6 @@ const Notification = ({ status, message, onClose }: INotification) => {
 
 export default function Notifications() {
     const { notifications, removeNotification } = useNotifications();
-    console.log(notifications)
 
     return (
         <div className="notifications">

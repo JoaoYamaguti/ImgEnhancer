@@ -37,13 +37,9 @@ export default function Page() {
 
         const sign = await signup(infos)
 
-        console.log(sign)
-
-        if (sign.message?.length && sign.status) {
-            console.log(sign.message)
+        if (sign.message && sign.status) {
             const arr = [...sign.message]
             arr.forEach((m: string) => {
-                console.log(m)
                 addNotification('error', `${sign.status} - ${m}`)
             })
             return
@@ -51,20 +47,19 @@ export default function Page() {
 
         const logged = await login({ email, password })
 
-        const { token, user } = logged
-
-        sessionStorage.setItem('token', token)
-        sessionStorage.setItem('user', user)
-
-        if (logged.token) {
-            console.log(logged)
-            router.push('/user/gallery')
-        }
-
-        if (logged.status !== 200 && logged.message?.length && logged.status) {
+        if (logged.message && logged.status) {
             console.log(logged)
 
             addNotification('error', `${logged.status} - ${logged.message[0]}`)
+
+            return
+        }
+
+        if(logged.token && logged.user) {
+            sessionStorage.setItem('token', logged.token)
+            sessionStorage.setItem('user', logged.user)
+    
+            router.push('/user/gallery')
         }
     }
 

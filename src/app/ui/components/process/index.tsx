@@ -58,7 +58,13 @@ export default function Process({ setVisibility, process }: ProcessParams) {
             caught_file: file,
             new_file: newFile
         }
+
         const response = await postImg(data)
+
+        if (response.message && response.status) {
+            addNotification('error', `${response.status} - ${response.message[0]}`)
+            return
+        }
 
         if (response) {
             addNotification('success', "Image saved.")

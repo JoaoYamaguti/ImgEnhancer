@@ -23,7 +23,9 @@ export default function Infos({ card, setShowInfos, refreshCallback }: IInfosPar
         await deleteImgInGallery(card.id)
 
         refreshCallback()
+
         addNotification('success', "Image deleted.")
+        
         setShowInfos(false)
     }
 

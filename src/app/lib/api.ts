@@ -12,16 +12,13 @@ export const signup = async (user: { name: string, email: string, password: stri
             name, email, password
         })
 
-        const token = ''
-        const user = JSON.stringify(response.data.user)
-
-        return { token, user }
+        return {
+            status: response.status,
+        }
     } catch (error) {
         console.log(error)
         const err = error as IApiResponseError
         return {
-            token: '',
-            user: '',
             status: err.status,
             message: err.response.data.message
         }
@@ -37,25 +34,23 @@ export const login = async (credentials: { email: string, password: string }): P
             password: password
         });
 
-        const token = response.data.token
-        const user = JSON.stringify(response.data.user)
+        const token = response.data.message.token
+        const user = JSON.stringify(response.data.message.user)
 
         return { token, user }
     } catch (error) {
+        console.log(error)
         const err = error as IApiResponseError
         return {
-            token: '',
-            user: '',
             status: err.status,
             message: err.response.data.message
         }
     }
 }
 
-export const postImg = async (data: { filename: string, caught_file: string, new_file: string }) => {
+export const postImg = async (data: { filename: string, caught_file: string, new_file: string }): Promise<IApiResponse> => {
     const { filename, caught_file, new_file } = data
     const token = sessionStorage.getItem('token')
-
 
     try {
         const response = await axios.post('/gallery', {
@@ -68,7 +63,11 @@ export const postImg = async (data: { filename: string, caught_file: string, new
 
         return response
     } catch (error) {
-        return error
+        const err = error as IApiResponseError
+        return {
+            status: err.status,
+            message: err.response.data.message
+        }
     }
 }
 
@@ -86,7 +85,7 @@ export const getGallery = async (page: number) => {
             params: queryParams
         });
 
-        return response.data
+        return response.data.message
     } catch (error) {
         return error
     }

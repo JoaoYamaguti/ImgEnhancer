@@ -1,15 +1,15 @@
 export interface IApiResponse {
-    token: string
-    user: string
+    token?: string
+    user?: string
     status?: number
-    message?: string[]
+    message?: Array<string>
 }
 
 export interface IApiResponseError {
     status: number
     response: {
         data: {
-            message: string[]
+            message: Array<string>
         }
     }
 }

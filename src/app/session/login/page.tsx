@@ -24,13 +24,7 @@ export default function Page() {
 
         const logged = await login(credentials)
 
-        const { token, user } = logged
-
-        sessionStorage.setItem('token', token)
-        sessionStorage.setItem('user', user)
-
-
-        if (logged.status !== 200 && logged.message?.length && logged.status) {
+        if (logged.message && logged.status) {
             console.log(logged)
 
             addNotification('error', `${logged.status} - ${logged.message[0]}`)
@@ -38,7 +32,13 @@ export default function Page() {
             return
         }
 
-        router.push('/user/gallery')
+        if(logged.token && logged.user) {
+            sessionStorage.setItem('token', logged.token)
+            sessionStorage.setItem('user', logged.user)
+    
+            router.push('/user/gallery')
+        }
+
     }
 
     return (
