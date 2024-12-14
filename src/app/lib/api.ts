@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IApiResponse, IApiResponseError } from "./interfaces/apiResponse.interface";
 
-axios.defaults.baseURL = process.env.DATABASE_RENDER_URL;
+const baseURL = process.env.DATABASE_RENDER_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export const signup = async (user: { name: string, email: string, password: string }): Promise<IApiResponse> => {
@@ -32,7 +32,7 @@ export const login = async (credentials: { email: string, password: string }): P
     const { email, password } = credentials
 
     try {
-        const response = await axios.post('/session', {
+        const response = await axios.post(`${baseURL}/session`, {
             email: email,
             password: password
         });
