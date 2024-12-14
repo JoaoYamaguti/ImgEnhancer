@@ -168,11 +168,12 @@ export default function Page() {
                     </div>
 
                     <div className={styles.field}>
-                        <input type="file" name="file" id="file"
-                            accept=".png, .jpeg, .svg"
-                            onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])}
-                        />
-                        <label htmlFor="file">{file ? file.name : 'Choose or drag a file'}</label>
+                        <label htmlFor="file">{file ? file.name : 'Choose or drag a file'}
+                            <input type="file" name="file" id="file"
+                                accept=".png, .jpeg, .svg"
+                                onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])}
+                            />
+                        </label>
                     </div>
 
                     <button type="button" onClick={handleProcess}>Enhance</button>
