@@ -59,7 +59,7 @@ export default function Page() {
                                 showInfos && <Infos card={cardInfos} setShowInfos={setShowInfos} refreshCallback={handleGallery} />
                             }
                             <div className="page">
-                                <div onClick={() => {
+                                <div className='icon' onClick={() => {
                                     if (page - 1 != 0) setPage(page - 1)
                                 }}>
                                     <FiChevronLeft />
@@ -67,7 +67,7 @@ export default function Page() {
 
                                 {page}
 
-                                <div onClick={() => {
+                                <div className='icon' onClick={() => {
                                     if (page < (length / 6)) setPage(page + 1)
                                 }}>
                                     <FiChevronRight />

@@ -13,9 +13,6 @@
 }
 
 .userNav {
-
-    // margin-right: -10rem;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,32 +28,41 @@
 
         li {
             display: none;
-            // display: flex;
-            align-items: center;
-            justify-content: center;
-            // animation: userNavAnimation 500ms alternate;
+            a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: .2rem;
+
+                svg{
+                    width: 18px;
+                    height: 18px;
+                }
+            }
         }
 
         li:nth-child(1),
-        li:nth-child(2) {
+        li:nth-child(2),
+        li:nth-child(3) {
             opacity: 0;
             display: none;
-            // animation: userNavAnimation 500ms reverse;
         }
     }
 
     .icon {
         display: flex;
-        opacity: 100;
         cursor: pointer;
+        
+        svg{
+            width: 20px;
+            height: 20px;
+            
+        }
     }
 
-    // .icon:hover + ul {
-    //     opacity: 100;
-
-    // }
     ul:hover li:nth-child(1),
-    ul:hover li:nth-child(2) {
+    ul:hover li:nth-child(2),
+    ul:hover li:nth-child(3) {
         animation: userNavAnimation 500ms forwards;
         display: flex;
         opacity: 1;

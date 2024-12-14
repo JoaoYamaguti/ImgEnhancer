@@ -57,14 +57,14 @@ export const services: IService[] = [
         components: [{
             type: 'number',
             value: 'width',
-            min: 0.1,
-            max: 10,
+            min: 100,
+            max: 1080,
         },
         {
             type: 'number',
             value: 'height',
-            min: 0.1,
-            max: 10,
+            min: 100,
+            max: 1080,
         }
         ]
     },

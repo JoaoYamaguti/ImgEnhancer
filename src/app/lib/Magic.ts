@@ -52,7 +52,7 @@ export default async function Magic(process: IMagic['process'], setNewFile: IMag
             case 'resize':
                 if (process.width && !process.height) image.resize({ w: process.width })
 
-                if (!process?.width && process.height) image.resize({ h: process?.height })
+                if (!process?.width && process.height) image.resize({ h: process.height })
 
                 if (process.width && process.height) image.resize({ w: process.width, h: process.height })
 

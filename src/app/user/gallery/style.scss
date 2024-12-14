@@ -48,6 +48,11 @@ $card: 15rem;
         font-size: 1.4rem;
         line-height: 1.5rem;
 
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         svg {
             width: 1.8rem;
             height: 30px;

@@ -12,6 +12,7 @@ export default function UserNav() {
     return (
         <div className="userNav">
             <ul >
+                <li><Link href={'/enhancer'}>Enhancer</Link></li>
                 <li><Link href={'/user/gallery'}>Gallery</Link></li>
                 <li><Link href={'/'} onClick={logout}><FiLogOut />Logout</Link></li>
                 <li className="icon">
