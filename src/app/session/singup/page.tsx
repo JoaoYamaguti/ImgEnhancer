@@ -48,17 +48,15 @@ export default function Page() {
         const logged = await login({ email, password })
 
         if (logged.message && logged.status) {
-            console.log(logged)
-
             addNotification('error', `${logged.status} - ${logged.message[0]}`)
 
             return
         }
 
-        if(logged.token && logged.user) {
+        if (logged.token && logged.user) {
             sessionStorage.setItem('token', logged.token)
             sessionStorage.setItem('user', logged.user)
-    
+
             router.push('/user/gallery')
         }
     }

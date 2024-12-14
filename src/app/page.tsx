@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <>
-    <Header />
+      <Header />
       <main className={styles.container}>
 
         <div className={styles.content}>

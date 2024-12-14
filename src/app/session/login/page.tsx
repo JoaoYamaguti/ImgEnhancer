@@ -1,10 +1,10 @@
 'use client'
 import Link from 'next/link'
-import './style.scss'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { login } from '@imgenhancer/app/lib/api'
 import { useNotifications } from '@imgenhancer/app/ui/context/NotificationContext'
+import './style.scss'
 
 export default function Page() {
     const {addNotification} = useNotifications()
@@ -25,10 +25,7 @@ export default function Page() {
         const logged = await login(credentials)
 
         if (logged.message && logged.status) {
-            console.log(logged)
-
             addNotification('error', `${logged.status} - ${logged.message[0]}`)
-
             return
         }
 

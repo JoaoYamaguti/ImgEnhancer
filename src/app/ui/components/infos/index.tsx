@@ -16,7 +16,7 @@ interface IInfosParams {
 }
 
 export default function Infos({ card, setShowInfos, refreshCallback }: IInfosParams) {
-    const {addNotification} = useNotifications()
+    const { addNotification } = useNotifications()
     const [showDeleteComponent, setShowDeleteComponent] = useState(false)
 
     async function deleteImg() {
@@ -25,7 +25,7 @@ export default function Infos({ card, setShowInfos, refreshCallback }: IInfosPar
         refreshCallback()
 
         addNotification('success', "Image deleted.")
-        
+
         setShowInfos(false)
     }
 
@@ -73,11 +73,11 @@ export default function Infos({ card, setShowInfos, refreshCallback }: IInfosPar
                     </div>
                     {
                         showDeleteComponent && (
-                            <div className="delete" onClick={()=> setShowDeleteComponent(false)}>
+                            <div className="delete" onClick={() => setShowDeleteComponent(false)}>
                                 <div className="content" onClick={(e) => e.stopPropagation()}>
                                     <p>Make you sure you want delete these images?</p>
                                     <div className="btns">
-                                        <button type="button" className="btn" onClick={()=> setShowDeleteComponent(false)}>Cancel</button>
+                                        <button type="button" className="btn" onClick={() => setShowDeleteComponent(false)}>Cancel</button>
                                         <button type="button" className="btn del" onClick={deleteImg}>Delete</button>
                                     </div>
                                 </div>

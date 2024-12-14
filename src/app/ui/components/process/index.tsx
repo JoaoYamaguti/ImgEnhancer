@@ -19,9 +19,9 @@ interface ProcessParams {
     process: Partial<IProcess>
 }
 
-export default function Process({ setVisibility, process }: ProcessParams) {   
-    const {addNotification} = useNotifications()
-    
+export default function Process({ setVisibility, process }: ProcessParams) {
+    const { addNotification } = useNotifications()
+
     const user = JSON.parse(sessionStorage.getItem('user') as string)
 
     const [file, setfile] = useState('')
@@ -51,7 +51,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
     async function saveImg() {
         let filename = ""
 
-        if (process.file !== undefined) {filename = process.file.name.split('.')[0]}
+        if (process.file !== undefined) { filename = process.file.name.split('.')[0] }
 
         const data = {
             filename,
@@ -75,7 +75,7 @@ export default function Process({ setVisibility, process }: ProcessParams) {
 
     useEffect(() => {
         enhanceImg()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

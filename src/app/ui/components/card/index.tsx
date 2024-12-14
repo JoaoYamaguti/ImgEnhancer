@@ -21,7 +21,7 @@ export default function Card({ card, setShowInfos, setCardInfos }: ICardParams) 
         <div className="card" onClick={() => {
             setCardInfos(card)
             setShowInfos(true)
-            }}>
+        }}>
             <div className="imgs">
                 <Image
                     src={card.caught_file}
@@ -41,7 +41,7 @@ export default function Card({ card, setShowInfos, setCardInfos }: ICardParams) 
                     <p>{card.filename}</p>
                     <span>{new Date(card.created_at).toLocaleDateString("pt-br")}</span>
                 </div>
-                    <FiInfo />
+                <FiInfo />
             </div>
         </div>
     )

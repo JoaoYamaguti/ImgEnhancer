@@ -71,6 +71,17 @@ export default function Page() {
         }
     }
 
+    function isValid(label: string, value: number) {
+        const component = service.components && service.components.find((c) => c.value === label) as IComponent
+        if (component === undefined) return console.log(`${label} component does not found`)
+        if (component.min === undefined || component.max === undefined) return
+        if (value < component.min || value > component.max) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     const handleProcess = () => {
         if (process !== null) {
             const processObj = {} as IProcess
@@ -120,17 +131,6 @@ export default function Page() {
 
             setProcess(processObj)
             setVisibility(true)
-        }
-    }
-
-    function isValid(label: string, value: number) {
-        const component = service.components && service.components.find((c) => c.value === label) as IComponent
-        if (component === undefined) return console.log(`${label} component does not found`)
-        if (component.min === undefined || component.max === undefined) return
-        if (value < component.min || value > component.max) {
-            return false
-        } else {
-            return true
         }
     }
 

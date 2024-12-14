@@ -13,7 +13,7 @@ export default function Header() {
 
     useEffect(() => {
         setUser(JSON.parse(sessionStorage.getItem('user') as string))
-    },[])
+    }, [])
 
     return (
         <header className={styles.header}>
@@ -24,11 +24,11 @@ export default function Header() {
             </h1>
             <nav>
                 {
-                    user != null ? 
-                    <UserNav />
-                    :
-                    <Link href='/session/login'>Login</Link>
-                    
+                    user != null ?
+                        <UserNav />
+                        :
+                        <Link href='/session/login'>Login</Link>
+
                 }
             </nav>
         </header>

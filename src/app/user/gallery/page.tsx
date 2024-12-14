@@ -11,8 +11,8 @@ import Loading from '@imgenhancer/app/ui/components/loading'
 
 import { getGallery } from '@imgenhancer/app/lib/api'
 
-import './style.scss'
 import { useRouter } from 'next/navigation'
+import './style.scss'
 
 export default function Page() {
     const router = useRouter()
@@ -27,8 +27,6 @@ export default function Page() {
 
     const handleGallery = async () => {
         const data = await getGallery(page)
-
-        console.log(data)
 
         if (data.status === 401) {
             sessionStorage.clear()
