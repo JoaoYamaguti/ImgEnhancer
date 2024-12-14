@@ -17,7 +17,7 @@ import { IProcess } from "../lib/interfaces/process.interface";
 import styles from './style.module.scss'
 
 export default function Page() {
-    const {addNotification} = useNotifications()
+    const { addNotification } = useNotifications()
 
     const options: string[] = ['']
     services.forEach((s) => options.push(s.service))
@@ -78,7 +78,7 @@ export default function Page() {
             if (option) {
                 processObj.service = option
             } else {
-                addNotification("error","Make sure you had chosen a option.")
+                addNotification("error", "Make sure you had chosen a option.")
                 return
             }
             if (file) {
@@ -136,52 +136,52 @@ export default function Page() {
 
     return (
         <>
-        <Header />
-        <main className={styles.enhancer}>
-            <form action="" className={styles.form}>
+            <Header />
+            <main className={styles.enhancer}>
+                <form action="" className={styles.form}>
 
-                <div className={styles.selectors}>
-                    <select name="options" id="options" onChange={(e) => { handleOption(e.target.value) }}>
-                        {
-                            options.map((option, index) => <option key={index} value={option}>{option}</option>)
-                        }
-                    </select>
+                    <div className={styles.selectors}>
+                        <select name="options" id="options" onChange={(e) => { handleOption(e.target.value) }}>
+                            {
+                                options.map((option, index) => <option key={index} value={option}>{option}</option>)
+                            }
+                        </select>
 
-                    <div className={styles.params}>
-                        {
-                            (service.components) && service.components.map((c, index) => {
-                                if (c.type === 'number' && c.value === 'value') {
-                                    return <Number key={index} label={'value'} value={value} setValue={setValue} min={c.min} max={c.max} />
-                                }
-                                else if (c.type === 'number' && c.value === 'width') {
-                                    return <Number key={index} label={'width'} value={width} setValue={setWidth} min={c.min} max={c.max} />
-                                }
-                                else if (c.type === 'number' && c.value === 'height') {
-                                    return <Number key={index} label={'height'} value={height} setValue={setHeight} min={c.min} max={c.max} />
-                                }
-                                else if (c.type === 'select') {
-                                    return <Rotate key={index} options={c.options} setValue={setValue} />
-                                }
-                            })
-                        }
+                        <div className={styles.params}>
+                            {
+                                (service.components) && service.components.map((c, index) => {
+                                    if (c.type === 'number' && c.value === 'value') {
+                                        return <Number key={index} label={'value'} value={value} setValue={setValue} min={c.min} max={c.max} />
+                                    }
+                                    else if (c.type === 'number' && c.value === 'width') {
+                                        return <Number key={index} label={'width'} value={width} setValue={setWidth} min={c.min} max={c.max} />
+                                    }
+                                    else if (c.type === 'number' && c.value === 'height') {
+                                        return <Number key={index} label={'height'} value={height} setValue={setHeight} min={c.min} max={c.max} />
+                                    }
+                                    else if (c.type === 'select') {
+                                        return <Rotate key={index} options={c.options} setValue={setValue} />
+                                    }
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
 
-                <div className={styles.field}>
-                    <input type="file" name="file" id="file"
-                        accept=".png, .jpeg, .svg"
-                        onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])}
-                    />
-                    <label htmlFor="file">{file ? file.name : 'Choose or drag a file'}</label>
-                </div>
+                    <div className={styles.field}>
+                        <input type="file" name="file" id="file"
+                            accept=".png, .jpeg, .svg"
+                            onChange={(e) => e.target.files !== null && handleFile(e.target.files[0])}
+                        />
+                        <label htmlFor="file">{file ? file.name : 'Choose or drag a file'}</label>
+                    </div>
 
-                <button type="button" onClick={handleProcess}>Enhance</button>
+                    <button type="button" onClick={handleProcess}>Enhance</button>
 
-                {
-                    visibility && <Process setVisibility={setVisibility} process={process} />
-                }
-            </form>
-        </main>
+                    {
+                        visibility && <Process setVisibility={setVisibility} process={process} />
+                    }
+                </form>
+            </main>
         </>
     )
 }
