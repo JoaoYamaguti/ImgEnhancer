@@ -63,8 +63,6 @@ export default function Page() {
                             <div className="page">
                                 <div onClick={() => {
                                     if (page - 1 != 0) setPage(page - 1)
-                                    setGallery(null)
-
                                 }}>
                                     <FiChevronLeft />
                                 </div>
@@ -73,7 +71,6 @@ export default function Page() {
 
                                 <div onClick={() => {
                                     if (page < (length / 6)) setPage(page + 1)
-                                    setGallery(null)
                                 }}>
                                     <FiChevronRight />
                                 </div>
