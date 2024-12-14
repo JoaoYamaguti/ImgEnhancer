@@ -17,6 +17,11 @@ export default function Page() {
     async function signIn() {
         const credentials = { email, password }
 
+        if ( email === '' || password === '') {
+            addNotification('error', 'Please, insert all information')
+            return
+        }
+
         const logged = await login(credentials)
 
         const { token, user } = logged
@@ -24,16 +29,16 @@ export default function Page() {
         sessionStorage.setItem('token', token)
         sessionStorage.setItem('user', user)
 
-        if (logged.token) {
-            console.log(logged)
-            router.push('/user/gallery')
-        }
 
         if (logged.status !== 200 && logged.message?.length && logged.status) {
             console.log(logged)
 
-            addNotification('success', `${logged.status} - ${logged.message[0]}`)
+            addNotification('error', `${logged.status} - ${logged.message[0]}`)
+
+            return
         }
+
+        router.push('/user/gallery')
     }
 
     return (
