@@ -21,7 +21,7 @@ $font: #0a0a0a;
 @mixin button($bgcolor: $primary-color) {
 
     border: none;
-    border-radius: 24px;
+    border-radius: 6px;
 
     padding: .5em 1.5em;
 
