@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import UserNav from "../userNav";
 
 import styles from "./style.module.scss";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
 
     const [user, setUser] = useState(null)
+    console.log(usePathname().toString())
 
     useEffect(() => {
         setUser(JSON.parse(sessionStorage.getItem('user') as string))
@@ -23,12 +25,15 @@ export default function Header() {
                 </Link>
             </h1>
             <nav>
+                <span><Link href='/enhancer'>Enhance</Link></span>
                 {
-                    user != null ?
+                    usePathname().toString() != "/session/login" && 
+                    (user != null ?
                         <UserNav />
                         :
-                        <Link href='/session/login'>Login</Link>
-
+                        <span>
+                            <Link href='/session/login'>Login</Link>
+                        </span>)
                 }
             </nav>
         </header>

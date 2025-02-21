@@ -13,59 +13,62 @@
 }
 
 .userNav {
+    position: relative;
+}
+
+.hamburguerMenu {
+
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
+    flex-flow: column nowrap;
+    gap: .25rem;
 
-    ul {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 2rem;
+    cursor: pointer;
 
+    & div {
+        inline-size: 1.5rem;
+        block-size: .2rem;
+
+        background-color: white;
+    }
+}
+
+.menuPopup {
+    inline-size: 10rem;
+    margin-bottom: .25rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+
+    border: solid 1px rgb(182, 182, 182);
+    border-radius: 8px;
+    padding: .5rem;
+
+    background-color: white;
+
+    & ul {
         list-style: none;
-
-        li {
-            display: none;
-            a{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: .2rem;
-
-                svg{
-                    width: 18px;
-                    height: 18px;
-                }
-            }
-        }
-
-        li:nth-child(1),
-        li:nth-child(2),
-        li:nth-child(3) {
-            opacity: 0;
-            display: none;
-        }
-    }
-
-    .icon {
         display: flex;
-        cursor: pointer;
-        
-        svg{
-            width: 20px;
-            height: 20px;
-            
+        flex-flow: column nowrap;
+        gap: .5rem;
+
+        & li {
+            border-radius: 8px;
+            padding: .4rem;
+
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: .5rem;
+
+            cursor: pointer;
         }
-    }
 
-    ul:hover li:nth-child(1),
-    ul:hover li:nth-child(2),
-    ul:hover li:nth-child(3) {
-        animation: userNavAnimation 500ms forwards;
-        display: flex;
-        opacity: 1;
+        & li:nth-child(4) {
+            color: red;
+        }
 
+        & li:hover {
+            background-color: rgb(243, 243, 243);
+        }
     }
 }

@@ -1,15 +1,16 @@
 $primary-color: rgb(226, 102, 0);
-$secondary-color: rgb(0, 78, 151) ; 
+$primary-dark-color: rgb(129, 58, 0);
+$secondary-color: rgb(0, 78, 151);
 $download-color: red;
 
 $background: #ededed;
-$foreground: #0a0a0a;
+$foreground: #141414;
 
 $grayzinho: #eaeaea;
 
 $border-input-color: #adadad;
 
-$font: #0a0a0a;
+$font: #000000;
 
 @mixin flex-v-center() {
     display: flex;
@@ -20,18 +21,46 @@ $font: #0a0a0a;
 
 @mixin button($bgcolor: $primary-color) {
 
+    box-shadow: 0 0 10px 0px #000000ab;
+
     border: none;
     border-radius: 6px;
-
-    padding: .5em 1.5em;
+    padding: .5rem 1rem;
 
     background-color: $bgcolor;
 
-    font-size: 1rem;
     font-weight: bolder;
     text-decoration: none;
     text-transform: uppercase;
+    cursor: pointer;
+
     color: white;
 
+}
+
+@mixin buttonMI($txtcolor: $primary-color, $bgcolor: $primary-dark-color) {
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: $primary-dark-color;
+
+    text-decoration: none;
+    text-transform: uppercase;
     cursor: pointer;
+
+    span {
+        display: block;
+        padding: .5rem 1rem;
+        border-radius: 6px;
+        background: $txtcolor;
+        font-weight: 800;
+        color: white;
+        transform: translateY(-6px);
+        transition: transform ease 0.1s;
+    }
+
+     span:active {
+        transform: translateY(-2px);
+    }
 }

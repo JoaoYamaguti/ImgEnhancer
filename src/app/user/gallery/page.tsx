@@ -78,7 +78,7 @@ export default function Page() {
                         <div className='noImg'>
                             <FiFrown />
                             <p>
-                                No image here <br /> Try enhance and save some images and go back here
+                                No image here <br /> Try enhance and save some images and go back here.
                             </p>
                         </div>
                     )
