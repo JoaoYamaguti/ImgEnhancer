@@ -29,7 +29,7 @@
             flex-basis: 12rem;
             block-size: 40px;
 
-            border-radius: 16px;
+            border-radius: 6px;
 
             background-color: $background;
 
@@ -77,14 +77,13 @@
     }
 
     button {
-        align-self: center;
-
         @include button();
 
-        cursor: pointer;
+        align-self: flex-end;
+
+        font-size: 1.1rem;
+
     }
-
-
 }
 
 .field {
@@ -93,7 +92,7 @@
 
     margin: auto;
     border: 2px dashed rgb(49, 49, 49);
-    border-radius: 24px;
+    border-radius: 6px;
 
     display: flex;
     flex-flow: column;
@@ -127,7 +126,6 @@
 
         cursor: pointer;
     }
-
 }
 
 @media (max-width: 40rem) {

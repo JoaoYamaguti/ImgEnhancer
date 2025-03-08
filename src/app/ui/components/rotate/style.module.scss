@@ -7,4 +7,9 @@
     gap: 1rem;
 
     text-transform: capitalize;
+
+    & select {
+        max-inline-size: 4rem !important;
+        block-size: 1.6rem !important;
+    }
 }

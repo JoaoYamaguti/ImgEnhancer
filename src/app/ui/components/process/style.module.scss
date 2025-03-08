@@ -1,4 +1,4 @@
-@use '../../styles/settings.module' as * ;
+@use '../../styles/settings.module' as *;
 
 .process {
     inline-size: 100vw;
@@ -24,7 +24,7 @@
         justify-content: space-between;
         gap: 1rem;
 
-        border-radius: 32px;
+        border-radius: 12px;
         margin: auto;
         padding: 1rem;
 
@@ -34,46 +34,36 @@
 
     }
 
-    .close{
-        align-self: flex-end;
 
-        width: 30px;
-        height: 30px;
 
-        background-image: url('../../../../../public/botao-excluir.png');
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: contain;
 
-        cursor: pointer;
-    }
-
-    
     .content {
         @include flex-v-center;
         gap: 1rem;
-        
+
         .response {
             @include flex-v-center;
             gap: 1rem;
-    
+
             .figures {
                 display: flex;
                 flex-flow: row wrap;
                 justify-content: center;
                 align-items: flex-start;
                 gap: 1rem;
-                
+
                 div {
                     flex-basis: 15rem;
-                    
+
                     @include flex-v-center;
                     gap: 1rem;
                 }
-                span{
-                     font-weight: bold;
+
+                span {
+                    font-weight: bold;
                 }
-                img{
+
+                img {
                     object-fit: contain;
                     object-position: center;
                 }
@@ -81,35 +71,45 @@
 
             a {
                 @include button($download-color);
-    
+
                 display: flex;
                 justify-content: center;
                 align-items: center;
-    
+
                 border: none;
                 border-radius: 24px;
 
                 text-align: center;
                 font-size: 1rem;
-                
-                img{
+
+                img {
                     margin-bottom: 3px
                 }
             }
         }
-    
-        hr{
+
+        hr {
             width: 100%;
         }
-    
+
         .login {
             @include flex-v-center;
-    
+
             gap: 1rem;
-    
+
             a {
                 @include button()
             }
         }
     }
+}
+
+.btnsProcess {
+    background-color: red;
+    inline-size: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+
 }

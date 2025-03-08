@@ -1,18 +1,18 @@
 "use client"
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import Image from 'next/image';
+import Link from 'next/link';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { IProcess } from "../../../lib/interfaces/process.interface";
 
-import { postImg } from '@imgenhancer/app/lib/api'
-import Magic from '@imgenhancer/app/lib/Magic'
+import { postImg } from '@imgenhancer/app/lib/api';
+import Magic from '@imgenhancer/app/lib/Magic';
 
-import Loading from '../loading'
+import Loading from '../loading';
 
-import styles from './style.module.scss'
 import { useNotifications } from '../../context/NotificationContext';
+import styles from './style.module.scss';
 
 interface ProcessParams {
     setVisibility: Dispatch<SetStateAction<boolean>>
@@ -108,29 +108,36 @@ export default function Process({ setVisibility, process }: ProcessParams) {
                                     </div>
                                 </div>
 
-                                <a href={newFile} download>
-                                    <Image
-                                        src={'/download-direto-w.png'}
-                                        alt='download'
-                                        width={25}
-                                        height={25}
-                                    />
-                                    Download New Image
-                                </a>
+                                <div className="btnsProcess">
+                                    {
+                                        user && (
+                                            <button type='button' onClick={saveImg}>
+                                                Save Image
+                                            </button>
+                                        )
+                                    }
+
+                                    <a href={newFile} download>
+                                        <Image
+                                            src={'/download-direto-w.png'}
+                                            alt='download'
+                                            width={25}
+                                            height={25}
+                                        />
+                                        Download New Image
+                                    </a>
+                                </div>
                             </section>
 
-                            <hr />
-
                             {
-                                user ? (
-                                    <button type='button' onClick={saveImg}>
-                                        Save Image
-                                    </button>
-                                ) : (
-                                    <section className={styles.login}>
-                                        <span>Would you like save your images?</span>
-                                        <Link href={'/session/login'}>Login or Sing In</Link>
-                                    </section>
+                                !user && (
+                                    <>
+                                        <hr />
+                                        <section className={styles.login}>
+                                            <span>Would you like save your images?</span>
+                                            <Link href={'/session/login'}>Login or Sing In</Link>
+                                        </section>
+                                    </>
                                 )
                             }
                         </div>

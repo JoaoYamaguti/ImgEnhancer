@@ -16,7 +16,7 @@ export default function Home() {
 
         <div className={styles.content}>
           <h1>Enhance, Upscale and more...</h1>
-          <h2>Make your images and get a better version of them.  </h2>
+          <h2>Custom your images to better version of them.</h2>
           <Link href='./enhancer'>Get Start</Link>
         </div>
 
